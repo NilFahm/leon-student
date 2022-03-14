@@ -1,0 +1,19 @@
+<svg id="noun_Mute_4305234" xmlns="http://www.w3.org/2000/svg" width="43" height="43">
+    <defs>
+        <style>
+            .cls-1{fill:#1e1d20}
+        </style>
+    </defs>
+    <path id="Path_21346" data-name="Path 21346" class="cls-1" d="M47.674 84.677a1.063 1.063 0 0 0 1.073-1.077v-7.13a1.074 1.074 0 1 0-2.147 0v7.09a1.074 1.074 0 0 0 1.074 1.117z" transform="translate(-25.762 -43.016)"/>
+    <path id="Path_21347" data-name="Path 21347" class="cls-1" d="M39.374 94.747h7.086a1.074 1.074 0 1 0 0-2.147h-7.086a1.074 1.074 0 0 0 0 2.147z" transform="translate(-20.983 -52.829)"/>
+    <g id="Group_21335" data-name="Group 21335" transform="translate(8.512 20.186)">
+        <path id="Path_21348" data-name="Path 21348" class="cls-1" d="M74.261 54.745a13.067 13.067 0 0 1-1.761-6.571 1.074 1.074 0 0 1 2.147 0 10.8 10.8 0 0 0 1.2 4.982z" transform="translate(-72.5 -47.057)"/>
+        <path id="Path_21349" data-name="Path 21349" class="cls-1" d="M20.614 55.762a10.964 10.964 0 0 0 18.769-7.688 1.074 1.074 0 1 1 2.147 0 13.124 13.124 0 0 1-13.1 13.1 12.977 12.977 0 0 1-9.062-3.651c-.386-.301.988-2.023 1.246-1.761z" transform="translate(-15.331 -47)"/>
+    </g>
+    <g id="Group_21336" data-name="Group 21336" transform="translate(13.451 .859)">
+        <path id="Path_21350" data-name="Path 21350" class="cls-1" d="M32.248 41.356a6.015 6.015 0 0 0 10.179-4.295v-6.314l2.147-2.147v8.5a8.249 8.249 0 0 1-8.16 8.2h-.043a8.213 8.213 0 0 1-5.541-2.19c-.257-.294 1.203-1.969 1.418-1.754z" transform="translate(-28.253 -17.175)"/>
+        <path id="Path_21351" data-name="Path 21351" class="cls-1" d="M45.016 11.835V9.989a6.013 6.013 0 0 0-12.026 0v11.94a6.448 6.448 0 0 0 .215 1.589l-1.718 1.675a8.223 8.223 0 0 1-.687-3.264V9.989A8 8 0 0 1 38.917 2h.043a8.038 8.038 0 0 1 8.16 7.688z" transform="translate(-30.8 -2)"/>
+    </g>
+    <path id="Path_21352" data-name="Path 21352" class="cls-1" d="M15.988 45.264a1.1 1.1 0 0 0 .773-.3l28-27.745a1.093 1.093 0 0 0-1.546-1.546L15.172 43.418a1.089 1.089 0 0 0 0 1.546 1.2 1.2 0 0 0 .816.3z" transform="translate(-8.464 -8.757)"/>
+    <path id="Rectangle_94" data-name="Rectangle 94" style="fill:none" d="M0 0h43v43H0z"/>
+</svg>

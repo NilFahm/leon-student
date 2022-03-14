@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="34">
+    <defs>
+        <filter id="a" x="0" y="0" width="32" height="34" filterUnits="userSpaceOnUse">
+            <feOffset dy="2"/>
+            <feGaussianBlur result="blur"/>
+            <feFlood flood-color="#ffda85"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="Group 6093">
+        <g style="filter:url(#a)">
+            <path data-name="Path 20745" d="M16 0a16 16 0 0 1 0 32 16 16 0 0 1 0-32z" style="fill:#ffb916"/>
+        </g>
+        <path data-name="Path 21034" d="M-11774-1233.682a7.992 7.992 0 0 1 7.5-7.982v-1.22h-.813v-1.017h2.644v1.017h-.813v1.22a8.021 8.021 0 0 1 4.78 1.983l.761-.762.712.711-.763.762a8.026 8.026 0 0 1 2.008 5.288 8.005 8.005 0 0 1-8.006 8.007 8.007 8.007 0 0 1-8.01-8.007zm1.018.025a6.985 6.985 0 0 0 6.99 6.99 6.986 6.986 0 0 0 6.989-6.99 6.985 6.985 0 0 0-6.989-6.99 6.985 6.985 0 0 0-6.992 6.99zm6.024 0a.966.966 0 0 1 .966-.966.551.551 0 0 1 .2.026l2.976-2.974.71.737-2.948 2.949c0 .076.025.152.025.228a.965.965 0 0 1-.965.966.965.965 0 0 1-.966-.966z" transform="translate(11781.996 1250.306)" style="fill:#462170"/>
+    </g>
+</svg>

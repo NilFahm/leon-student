@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+    <defs>
+        <style>
+            .cls-1{fill:#e1e1e1}
+        </style>
+    </defs>
+    <g id="Ring_Chart2" data-name="Ring Chart2">
+        <path id="Path_21365" data-name="Path 21365" class="cls-1" d="M40-40A40 40 0 0 0 0 0a40 40 0 0 0 40 40v-8A32 32 0 0 1 8 0a32 32 0 0 1 32-32z" transform="translate(0 40)"/>
+        <path id="Path_21366" data-name="Path 21366" d="M-40 40A40 40 0 0 0-7.64 23.511a40 40 0 0 0 5.682-35.872l-7.608 2.472a32 32 0 0 1-4.545 28.7A32 32 0 0 1-40 32z" transform="translate(80 40)" style="fill:#bababa"/>
+        <path id="Path_21367" data-name="Path 21367" class="cls-1" d="M0-12.361A40 40 0 0 0-38.042-40v8A32 32 0 0 1-7.608-9.889z" transform="translate(78.042 40)"/>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="86" height="110">
+    <defs>
+        <filter id="a" x="0" y="0" width="86" height="110" filterUnits="userSpaceOnUse">
+            <feOffset dx="6" dy="3"/>
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feFlood flood-color="#462170" flood-opacity=".102"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g style="filter:url(#a)">
+        <g data-name="Path 20642" style="fill:#fff">
+            <path d="M79.5 55.5H.5V40a39.252 39.252 0 0 1 3.104-15.375 39.369 39.369 0 0 1 8.465-12.556 39.37 39.37 0 0 1 12.556-8.465A39.252 39.252 0 0 1 40 .5a39.252 39.252 0 0 1 15.375 3.104 39.37 39.37 0 0 1 12.556 8.465 39.37 39.37 0 0 1 8.465 12.556A39.252 39.252 0 0 1 79.5 40v15.5z" style="stroke:none" transform="rotate(-90 50.5 41.5)"/>
+            <path d="M79 55V40a38.755 38.755 0 0 0-3.064-15.18 38.871 38.871 0 0 0-8.359-12.397A38.871 38.871 0 0 0 55.18 4.064 38.755 38.755 0 0 0 40 1a38.755 38.755 0 0 0-15.18 3.064 38.871 38.871 0 0 0-12.397 8.359A38.871 38.871 0 0 0 4.064 24.82 38.755 38.755 0 0 0 1 40v15h78m1 1H0V40C0 17.909 17.909 0 40 0s40 17.909 40 40v16z" style="fill:#e8e8e8;stroke:none" transform="rotate(-90 50.5 41.5)"/>
+        </g>
+    </g>
+</svg>

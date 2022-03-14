@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="34">
+    <defs>
+        <filter id="a" x="0" y="0" width="32" height="34" filterUnits="userSpaceOnUse">
+            <feOffset dy="2"/>
+            <feGaussianBlur result="blur"/>
+            <feFlood flood-color="#dce4ff"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="Group 6093">
+        <g style="filter:url(#a)">
+            <path data-name="Path 20745" d="M16 0a16 16 0 0 1 0 32 16 16 0 0 1 0-32z" style="fill:#142668"/>
+        </g>
+        <g data-name="Group 6098">
+            <path data-name="Union 2" d="M5.788 12.844c0-1.393-2.311-2.569-3.762-2.569a.291.291 0 0 1-.275-.195l-.53-1.568a8.329 8.329 0 0 1-.932.051.285.285 0 1 1 0-.571c2.821 0 3.943-1.386 4.3-1.991a12.331 12.331 0 0 1-1.108-2.225C3.251 2.813 2.477.571.289.571A.288.288 0 0 1 0 .285.288.288 0 0 1 .289 0c1.832 0 3.2 1.329 3.754 3.645a13.368 13.368 0 0 0 1.125 2.2.283.283 0 0 1 .01.273A4.623 4.623 0 0 1 1.8 8.423l.436 1.287c1.7.1 4.13 1.415 4.13 3.133a.289.289 0 0 1-.579 0z" transform="translate(19.647 10.14)" style="fill:#aeb8dc;stroke:#aeb8dc;stroke-width:.5px"/>
+            <path data-name="Path 20690" d="M6.336 13.842c-.028-.064-5.889 0-6.048 0A.287.287 0 0 1 0 13.556v-.571a2.924 2.924 0 0 1 3.168-2.855h.71l.678-1A4.2 4.2 0 0 1 3.179 6.4c-.6-.088-.875-.464-.875-.837V4.421c0-.357.349-.614.576-.745v-.968c0-1.025.34-1.974 2.785-2A3.686 3.686 0 0 1 7.81 0a2.4 2.4 0 0 1 2.232 1.167 1.528 1.528 0 0 1-.251 1.64v.869c.228.13.576.388.576.745v1.142c0 .372-.274.75-.876.837a4.2 4.2 0 0 1-1.358 2.714l.706 1.018h.712a2.867 2.867 0 0 1 3.121 2.855v.571a.287.287 0 0 1-.288.284z" transform="translate(8 9)" style="fill:#fff"/>
+        </g>
+    </g>
+</svg>

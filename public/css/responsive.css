@@ -1,0 +1,112 @@
+
+@media only screen and (max-width: 990px){
+.studListTech li{ height: 11vh !important; }
+.teachMainBox .studList li.w100.teachBox{ height: 18vh !important; }
+.studList video{ height: 100%; }
+
+
+.teachMainBox .studListTech li.w100.teachBox .stuName{ padding: 0; }
+.teachMainBox .studListTech .stuName{ font-size: 1em; }
+
+}
+
+@media only screen and (min-width: 991px) and  (max-width: 1100px){
+ 	.teachMainBox .studList li.w100.teachBox .stuName{ padding: 0; }
+ 	.teachMainBox .studList li{    height: 12.2vh !important;}
+
+ 	.teachMainBox .studList li.teachBox{    height: 19.3vh !important;}
+ 	 
+
+}
+
+@media only screen and (min-width: 1101px) and (max-width: 1366px){
+	.homeBoxLeft{    width: calc(100% - 45%);}
+	.grauBox{ right: -60px; }
+	.homeBox2{ height: 45%; }
+	.homeBoxRight{ width: 37%; }
+	body{ font-size: 13px }
+	.homeLelvelLeft{ width: 29% }
+	.homeBoxLeft .homeBox1 .homeLelvel1{ width: calc(100% - 40%) }
+	.noti{width: 68px; height: 68px;  border-radius: 44px;  position: relative;}
+	.noti span{ top: 38%; right: 38% }
+	.profil .dropdown-menu{width: 250%}
+	.profil .dropdown-menu a{ font-size: 160% }
+	.brainBtn  .dropdown-menu{ width: 300px }
+	.brainBtn .dropdown-menu a{ font-size: 160% }
+ 	.profil .dropdown-menu h4{ font-size: 220% }
+
+ 	.teachBotomLinks a{ width: 120px; height: 60px; border-radius: 30px; background-size: 20% }
+ 	.teachBotomLinks a.techEndIcon{ width: 60px; height: 60px; border-radius: 30px; }
+ 	.teachBotomLinks a.techMicIcon { background-size: 15% }
+ 	.shareBoxNew a{padding:3.5% 0;}
+ 	.circlesBox .ringChart{ width: 110px; height: 110px; background-size: 100% }
+ 	/*.shareBoxNew.active{ bottom: 50px }*/
+ 	
+ 	.menuSmall{ width: 100px }
+ 	.menuSmall .dashLinks a{ width: 50px; height: 50px }
+ 	.dashLinks a::before{ background-size: 52% !important}
+ 	header .profil{ width: 68px; }
+ 	/*.studListTech li video{ height: 69px; }*/
+ 	.teachMainBox .studList li{height: 12vh !important; margin-bottom: 4px;}
+ 	.teachMainBox .studList3 li{height: 12vh !important;}
+ 	.teachMainBox .studList li.w100.teachBox{ height:17.8vh !important; }
+
+ 	.teachMainBox .studListTech li.w100.teachBox .stuName{ padding: 0; }
+ 	.logoBox img{ width: 16%; }
+ 	.teachMainBox .studList li.w100.teachBox video{ /*height: auto;*/ }
+
+ 	.studenConta{ max-width: 1030px; margin: auto;    left: 50% !important;
+    transform: translateX(-50%) }
+ 	.homeMainCont{ max-width: 100%; margin-left: auto; margin-right: auto; float: none; margin-top: 75px;}
+ 	.reslutTable{ margin-top: 2%; }
+ 	.homeBox2 h2{ font-size: 140%; }
+ 	.homeLelvel1 h3 { font-size: 200%; }
+
+ 
+}
+
+
+@media only screen and (min-width: 1367px) and (max-width: 2500px){
+	.menuSmall{ padding-left: 15px; padding-right: 15px; }
+	.dashBox1 h1{ padding: 7% 0 7% 8%; }
+	.dashTxt1{ padding-top: 7%; }
+	.dashSchBox .dashSchBoxIn{ padding-top: 5%; }
+	.dashSchBox .dashLes{ padding-bottom: 5%; }
+	.dashSchBox li{ margin-bottom: 6%; }
+	.dashSchBox li::before{ height: 25%; }
+	.dashBox1{ left: 80px; }
+
+	.teachMainBox .innerContain{ margin-top: 10%; }
+	.teachMainBox .recoTop, .teachMainBox .topLeft{ width: 200px; }
+	.teachMainBox .recoTop{ margin-left: 10px; }
+	.chatListCont p{ font-size: 110%; }
+	/*.teachMainBox .stuImgBox1 img{ height: 8vh; }*/
+
+	.teachMainBox .studListBox .stuImgBox1{/* display: inline-block;*//* position: relative;*/}
+	.teachMainBox .studListTech .studListBox{ width: auto; display: inline-block; }
+
+
+	.teachMainBox li.w100 .stuImgBox1 img{ height: auto;  }
+	.homeMainCont{ max-width: 950px; margin-left: auto; margin-right: auto; float: none; }
+	header .profil{ width: 44px; }
+	.container.studenConta{ height: 660px; }
+	 
+	/*.studList.studList2 .stuImgBox1 img{ height: 9.5vh; }
+	.studList.studListTech video{ height: 8vh; }*/
+
+	.studList.studListTech .teachBox video{  height: 100%; }
+
+	.innerContain2 .studListBox{ border-radius: 15px; }
+
+	.studListTech li{ height: 11vh !important; }
+
+	.teachMainBox .studList li.w100{ height: 29vh !important; }
+
+	.teachMainBox .studListTech li.w100 .stuName{ padding: 0; }
+	.logoBox img{ width: 16%; }
+
+	.teachMainBox .studList li{ height: 115px; }
+}
+
+
+ 
