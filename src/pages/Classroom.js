@@ -1,6 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import { useParams } from "react-router-dom";
+import { useTwilioData } from "../data/TwilioData";
+import { useLocalStorage } from "../utils/useLocalStorage";
+import Participant from "../components/call/Participant";
+import Video from "twilio-video";
 
 const Classroom = () => {
+  const [auth] = useLocalStorage("auth", {});
+  const { sessionid } = useParams();
+  const { GetRoomToken } = useTwilioData();
+  const [twiliotoken, setTwilioToken] = useState(null);
+  const [room, setRoom] = useState(null);
+  const [participants, setParticipants] = useState([]);
+
+  useEffect(async () => {
+    // if (auth && typeof auth.id !== "undefined") {
+    //   const response = await GetRoomToken(auth.token, sessionid);
+    //   setTwilioToken(response.authToken);
+    // }
+  }, [auth]);
+
+  const remoteParticipants = participants.map((participant) => (
+    // <></>
+    <Participant key={participant.sid} participant={participant} />
+  ));
+
+  useEffect(() => {
+    const participantConnected = (participant) => {
+      setParticipants((prevParticipants) => [...prevParticipants, participant]);
+    };
+    const participantDisconnected = (participant) => {
+      setParticipants((prevParticipants) =>
+        prevParticipants.filter((p) => p !== participant)
+      );
+    };
+
+    Video.connect(twiliotoken, {
+      name: sessionid,
+    }).then((room) => {
+      setRoom(room);
+      room.on("participantConnected", participantConnected);
+      room.on("participantDisconnected", participantDisconnected);
+      room.participants.forEach(participantConnected);
+    });
+    return () => {
+      setRoom((currentRoom) => {
+        if (currentRoom && currentRoom.localParticipant.state === "connected") {
+          currentRoom.localParticipant.tracks.forEach(function (
+            trackPublication
+          ) {
+            trackPublication.track.stop();
+          });
+          currentRoom.disconnect();
+          return null;
+        } else {
+          return currentRoom;
+        }
+      });
+    };
+  }, [sessionid, twiliotoken]);
+
   return (
     <>
       <div className="container">
@@ -8,18 +68,22 @@ const Classroom = () => {
         <div className="topBg"></div>
         <div className="innerContain">
           <div className="frameLeft1 FL">
-            <div className="liveIcon">
+            {/* <div className="liveIcon">
               <a href="#">
                 <img src="/img/liveIcon.svg" />
               </a>
-            </div>
+            </div> */}
             <div className="viewImg1">
-              <div className="whiteBoardBox">
-                <a href="#" className="micLink"></a>
+              <div className="whiteBoardBox position-relative">
+                <img src="/img/novideoImg1.png" />
+                <div class="novidShow d-flex align-items-center justify-content-center">
+                  <img src="/img/novideoImg1Inner.svg" />
+                </div>
+                {/* <a href="#" className="micLink"></a>
                 <div className="stuName stuName8">
                   <span>Mithali</span>
-                </div>
-                <video src="/img/video/video1.mp4" autoplay muted loop></video>
+                </div> */}
+                {/* <video src="/img/video/video1.mp4" autoplay muted loop></video> */}
               </div>
             </div>
           </div>
@@ -34,9 +98,51 @@ const Classroom = () => {
                   aria-labelledby="studList-tab"
                 >
                   <ul className="studList studList2 studList3">
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
+                    {room ? (
+                      <Participant
+                        key={room.localParticipant.sid}
+                        participant={room.localParticipant}
+                      />
+                    ) : (
+                      <li>
+                        <div className="studListBox position-relative d-flex align-items-center justify-content-center">
+                          <img
+                            src="/img/novideoImg1.png"
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              zIndex: "1",
+                            }}
+                          />
+                          <div class="novidShow d-flex align-items-center justify-content-center">
+                            <img
+                              src="/img/novideoImg1Inner.svg"
+                              style={{ zIndex: "2" }}
+                            />
+                          </div>
+                        </div>
+                      </li>
+                    )}
+                    {remoteParticipants}
+                    {Array.from(Array(7 - participants.length), (e, i) => {
+                      return (
+                        <li>
+                          <div className="studListBox position-relative d-flex align-items-center justify-content-center">
+                            <img
+                              src="/img/novideoImg1.png"
+                              style={{
+                                height: "100%",
+                                width: "100%",
+                                zIndex: "1",
+                              }}
+                            />
+                            <div class="novidShow d-flex align-items-center justify-content-center">
+                              <img
+                                src="/img/novideoImg1Inner.svg"
+                                style={{ zIndex: "2" }}
+                              />
+                            </div>
+                            {/* <div className="liveIcon">
                           <a href="#">
                             <img src="/img/liveIcon.svg" />
                           </a>
@@ -52,10 +158,12 @@ const Classroom = () => {
                         </div>
                         <div className="stuName stuName1">
                           <span> Joseph M</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="active">
+                        </div> */}
+                          </div>
+                        </li>
+                      );
+                    })}
+                    {/* <li className="active">
                       <div className="studListBox">
                         <div className="liveIcon">
                           <a href="#">
@@ -216,7 +324,7 @@ const Classroom = () => {
                           <span> Jinny H</span>
                         </div>
                       </div>
-                    </li>
+                    </li> */}
 
                     <div className="clear"></div>
                   </ul>

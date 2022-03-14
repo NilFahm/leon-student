@@ -19,7 +19,7 @@ const PrivateRoute = ({ element }) => {
 
 function App() {
   const { Login, Schedules, StartCall, Classroom } = Pages();
-  const { PublicLayout } = Layouts();
+  const { PublicLayout, ClassroomLayout } = Layouts();
 
   return (
     <BrowserRouter>
@@ -38,7 +38,7 @@ function App() {
         <Route
           path="/startcall/:sessionid"
           exact
-          element={<PrivateRoute element={<Classroom />} />}
+          element={<ClassroomLayout element={<Classroom />} />}
         />
       </Routes>
     </BrowserRouter>

@@ -53,11 +53,30 @@ const Participant = ({ participant }) => {
 
   return (
     <>
-      <div className="participant">
+      {/* <div className="participant">
         <h3>{participant.identity}</h3>
         <video ref={videoRef} autoPlay={true} />
         <audio ref={audioRef} autoPlay={true} muted={true} />
-      </div>
+      </div> */}
+      <li>
+        <div className="studListBox">
+          <div className="liveIcon">
+            <a href="#">
+              <img src="/img/liveIcon.svg" />
+            </a>
+          </div>
+          <a href="#" className="micLink"></a>
+          <a href="#" className="vidLink"></a>
+          <a href="activity-matching.html" className="stuPlusLink"></a>
+          <div className="stuImgBox1">
+            <video ref={videoRef} autoPlay={true} />
+            <audio ref={audioRef} autoPlay={true} />
+          </div>
+          <div className="stuName stuName3">
+            <span>{participant.identity}</span>
+          </div>
+        </div>
+      </li>
     </>
   );
 };

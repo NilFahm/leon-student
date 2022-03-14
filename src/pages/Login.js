@@ -6,7 +6,7 @@ import { useAuthData } from "../data/AuthData";
 const Login = () => {
   const navigate = useNavigate();
   const { LoginUser } = useAuthData();
-  const [setAuthData] = useLocalStorage("auth", {});
+  const [auth, setAuthData] = useLocalStorage("auth", {});
   const [passwordtype, setPasswordType] = useState("password");
   const [isremember, setIsRemember] = useLocalStorage("rememberme", null);
   const [logindata, setLoginData] = useState({
