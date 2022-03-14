@@ -15,10 +15,10 @@ const Classroom = () => {
   const [participants, setParticipants] = useState([]);
 
   useEffect(async () => {
-    // if (auth && typeof auth.id !== "undefined") {
-    //   const response = await GetRoomToken(auth.token, sessionid);
-    //   setTwilioToken(response.authToken);
-    // }
+    if (auth && typeof auth.id !== "undefined") {
+      const response = await GetRoomToken(auth.token, sessionid);
+      setTwilioToken(response.authToken);
+    }
   }, [auth]);
 
   const remoteParticipants = participants.map((participant) => (
@@ -68,22 +68,12 @@ const Classroom = () => {
         <div className="topBg"></div>
         <div className="innerContain">
           <div className="frameLeft1 FL">
-            {/* <div className="liveIcon">
-              <a href="#">
-                <img src="/img/liveIcon.svg" />
-              </a>
-            </div> */}
             <div className="viewImg1">
               <div className="whiteBoardBox position-relative">
                 <img src="/img/novideoImg1.png" />
                 <div class="novidShow d-flex align-items-center justify-content-center">
                   <img src="/img/novideoImg1Inner.svg" />
                 </div>
-                {/* <a href="#" className="micLink"></a>
-                <div className="stuName stuName8">
-                  <span>Mithali</span>
-                </div> */}
-                {/* <video src="/img/video/video1.mp4" autoplay muted loop></video> */}
               </div>
             </div>
           </div>
@@ -163,169 +153,6 @@ const Classroom = () => {
                         </li>
                       );
                     })}
-                    {/* <li className="active">
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <video
-                            src="/img/video/video1.mp4"
-                            autoplay
-                            muted
-                            loop
-                          ></video>
-                        </div>
-                        <div className="stuName stuName2">
-                          <span> Jenifer J</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <video
-                            src="/img/video/video1.mp4"
-                            autoplay
-                            muted
-                            loop
-                          ></video>
-                        </div>
-                        <div className="stuName stuName3">
-                          <span> Amrog M</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <img src="/img/stuImg4.png" />
-                        </div>
-                        <div className="stuName stuName4">
-                          <span> Peter K</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <video
-                            src="/img/video/video2.mp4"
-                            autoplay
-                            muted
-                            loop
-                          ></video>
-                        </div>
-                        <div className="stuName stuName5">
-                          <span> Sumith K</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <img src="/img/stuImg6.png" />
-                        </div>
-                        <div className="stuName stuName6">
-                          <span> David H</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <img src="/img/stuImg7.png" />
-                        </div>
-                        <div className="stuName stuName7">
-                          <span> Kelly D</span>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="studListBox">
-                        <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <img src="/img/stuImg8.png" />
-                        </div>
-                        <div className="stuName stuName8">
-                          <span> Jinny H</span>
-                        </div>
-                      </div>
-                    </li> */}
-
                     <div className="clear"></div>
                   </ul>
                 </div>
