@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Participant = ({ participant }) => {
+const TeacherParticipant = ({ participant }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
   const videoRef = useRef();
@@ -63,32 +63,23 @@ const Participant = ({ participant }) => {
 
   return (
     <>
-      {/* <div className="participant">
-        <h3>{participant.identity}</h3>
-        <video ref={videoRef} autoPlay={true} />
-        <audio ref={audioRef} autoPlay={true} muted={true} />
-      </div> */}
-      <li>
-        <div className="studListBox">
-          <div className="liveIcon">
-            <a href="#">
-              <img src="/img/liveIcon.svg" />
-            </a>
-          </div>
-          <a href="#" className="micLink"></a>
-          <a href="#" className="vidLink"></a>
-          <a href="activity-matching.html" className="stuPlusLink"></a>
-          <div className="stuImgBox1">
-            <video ref={videoRef} autoPlay={true} />
-            <audio ref={audioRef} autoPlay={true} />
-          </div>
-          <div className="stuName stuName3">
+      <div class="liveIcon">
+        <a href="#">
+          <img src="img/liveIcon.svg" />
+        </a>
+      </div>
+      <div class="viewImg1">
+        <div class="whiteBoardBox">
+          <a href="#" class="micLink"></a>
+          <div class="stuName stuName8">
             <span>{participant.identity}</span>
           </div>
+          <video ref={videoRef} autoPlay={true} />
+          <audio ref={audioRef} autoPlay={true} />
         </div>
-      </li>
+      </div>
     </>
   );
 };
 
-export default Participant;
+export default TeacherParticipant;

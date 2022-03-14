@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const Participant = ({ participant }) => {
+const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
   const videoRef = useRef();
@@ -63,11 +63,6 @@ const Participant = ({ participant }) => {
 
   return (
     <>
-      {/* <div className="participant">
-        <h3>{participant.identity}</h3>
-        <video ref={videoRef} autoPlay={true} />
-        <audio ref={audioRef} autoPlay={true} muted={true} />
-      </div> */}
       <li>
         <div className="studListBox">
           <div className="liveIcon">
@@ -75,11 +70,23 @@ const Participant = ({ participant }) => {
               <img src="/img/liveIcon.svg" />
             </a>
           </div>
-          <a href="#" className="micLink"></a>
-          <a href="#" className="vidLink"></a>
-          <a href="activity-matching.html" className="stuPlusLink"></a>
+          <a href="#" className={isaudioon ? "micLink" : "micLink active"}></a>
+          {/* <a href="#" className="vidLink"></a>
+          <a href="activity-matching.html" className="stuPlusLink"></a> */}
           <div className="stuImgBox1">
-            <video ref={videoRef} autoPlay={true} />
+            {!isvideoon && (
+              <>
+                <div class="novidShow d-flex align-items-center justify-content-center">
+                  <img src="/img/novideoImg2Inner.svg" />
+                </div>
+                <img src="/img/novideoImg2.png" />
+              </>
+            )}
+            <video
+              ref={videoRef}
+              autoPlay={true}
+              style={{ display: isvideoon ? "block" : "none" }}
+            />
             <audio ref={audioRef} autoPlay={true} />
           </div>
           <div className="stuName stuName3">
@@ -91,4 +98,4 @@ const Participant = ({ participant }) => {
   );
 };
 
-export default Participant;
+export default LocalParticipant;

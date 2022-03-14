@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useTwilioData } from "../data/TwilioData";
 import { useLocalStorage } from "../utils/useLocalStorage";
 import Participant from "../components/call/Participant";
 import Video from "twilio-video";
+import LocalParticipant from "../components/call/LocalParticipant";
+import TeacherParticipant from "../components/call/TeacherParticipant";
 
 const Classroom = () => {
   const [auth] = useLocalStorage("auth", {});
@@ -13,6 +15,8 @@ const Classroom = () => {
   const [twiliotoken, setTwilioToken] = useState(null);
   const [room, setRoom] = useState(null);
   const [participants, setParticipants] = useState([]);
+  const [isvideoon, setIsVideoOn] = useState(true);
+  const [isaudioon, setIsAudioOn] = useState(true);
 
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
@@ -21,10 +25,16 @@ const Classroom = () => {
     }
   }, [auth]);
 
-  const remoteParticipants = participants.map((participant) => (
-    // <></>
-    <Participant key={participant.sid} participant={participant} />
-  ));
+  const remoteParticipants = participants
+    .filter((x) => x.identity !== "azizi@leonclassroom.com")
+    .map((participant) => (
+      // <></>
+      <Participant key={participant.sid} participant={participant} />
+    ));
+
+  const teacherParticipant = participants.filter(
+    (x) => x.identity === "azizi@leonclassroom.com"
+  );
 
   useEffect(() => {
     const participantConnected = (participant) => {
@@ -61,6 +71,37 @@ const Classroom = () => {
     };
   }, [sessionid, twiliotoken]);
 
+  async function EndCall() {
+    setTwilioToken(null);
+    window.location.href = "/schedules";
+  }
+
+  async function VideoOnOff(on) {
+    if (on) {
+      room.localParticipant.videoTracks.forEach(function (track, trackId) {
+        track.track.disable();
+      });
+    } else {
+      room.localParticipant.videoTracks.forEach(function (track, trackId) {
+        track.track.enable();
+      });
+    }
+    setIsVideoOn(!on);
+  }
+
+  async function AudioOnOff(on) {
+    if (on) {
+      room.localParticipant.audioTracks.forEach(function (track, trackId) {
+        track.track.disable();
+      });
+    } else {
+      room.localParticipant.audioTracks.forEach(function (track, trackId) {
+        track.track.enable();
+      });
+    }
+    setIsAudioOn(!on);
+  }
+
   return (
     <>
       <div className="container">
@@ -68,14 +109,25 @@ const Classroom = () => {
         <div className="topBg"></div>
         <div className="innerContain">
           <div className="frameLeft1 FL">
-            <div className="viewImg1">
-              <div className="whiteBoardBox position-relative">
-                <img src="/img/novideoImg1.png" />
-                <div class="novidShow d-flex align-items-center justify-content-center">
-                  <img src="/img/novideoImg1Inner.svg" />
+            {teacherParticipant && teacherParticipant.length > 0 ? (
+              teacherParticipant.map((participant) => (
+                <TeacherParticipant
+                  key={participant.sid}
+                  participant={participant}
+                />
+              ))
+            ) : (
+              <>
+                <div className="viewImg1">
+                  <div className="whiteBoardBox position-relative">
+                    <img src="/img/novideoImg1.png" />
+                    <div class="novidShow d-flex align-items-center justify-content-center">
+                      <img src="/img/novideoImg1Inner.svg" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </>
+            )}
           </div>
 
           <div className="frameRight1 FR">
@@ -89,9 +141,11 @@ const Classroom = () => {
                 >
                   <ul className="studList studList2 studList3">
                     {room ? (
-                      <Participant
+                      <LocalParticipant
                         key={room.localParticipant.sid}
                         participant={room.localParticipant}
+                        isaudioon={isaudioon}
+                        isvideoon={isvideoon}
                       />
                     ) : (
                       <li>
@@ -257,9 +311,22 @@ const Classroom = () => {
       </div>
 
       <div class="handLinks">
-        <a href="#" class="linkMic"></a>
-        <a href="#" class="linkEnd active"></a>
-        <a href="#" class="linkVid"></a>
+        <Link
+          to=""
+          className={isaudioon ? "linkMic" : "linkMic active"}
+          onClick={(e) => AudioOnOff(isaudioon)}
+        ></Link>
+        <Link
+          to=""
+          className="linkEnd active"
+          onClick={(e) => EndCall()}
+          style={{ cursor: "pointer" }}
+        ></Link>
+        <Link
+          to=""
+          className={isvideoon ? "linkVid" : "linkVid active"}
+          onClick={(e) => VideoOnOff(isvideoon)}
+        ></Link>
         <a href="#" class="linkHand"></a>
       </div>
     </>
