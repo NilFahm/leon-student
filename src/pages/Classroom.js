@@ -7,6 +7,10 @@ import Participant from "../components/call/Participant";
 import Video from "twilio-video";
 import LocalParticipant from "../components/call/LocalParticipant";
 import TeacherParticipant from "../components/call/TeacherParticipant";
+import ParticipantNotConnected from "../components/call/ParticipantNotConnected";
+import Chat from "../components/call/Chat";
+import io from "socket.io-client";
+import TeacherNormalView from "../components/call/TeacherNormalView";
 
 const Classroom = () => {
   const [auth] = useLocalStorage("auth", {});
@@ -17,11 +21,20 @@ const Classroom = () => {
   const [participants, setParticipants] = useState([]);
   const [isvideoon, setIsVideoOn] = useState(true);
   const [isaudioon, setIsAudioOn] = useState(true);
+  const [isactivity, setIsActivity] = useState(false);
+  const [activity, setActivity] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [messagetext, setMessageText] = useState("");
+  const [currenttab, setCurrentTab] = useState(1);
+
+  const socket = io.connect("https://socket.fahm-technologies.com");
 
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
       const response = await GetRoomToken(auth.token, sessionid);
       setTwilioToken(response.authToken);
+      const joindata = { userid: auth.userid, roomname: sessionid };
+      socket.emit("joinRoom", joindata);
     }
   }, [auth]);
 
@@ -71,6 +84,27 @@ const Classroom = () => {
     };
   }, [sessionid, twiliotoken]);
 
+  useEffect(() => {
+    socket.on("activity", (data) => {
+      if (data.activity !== activity && data.activity !== "startcall") {
+        setActivity(data.activity);
+        setIsActivity(true);
+        setCurrentTab(3);
+      } else {
+        setActivity(null);
+        setIsActivity(false);
+        setCurrentTab(1);
+      }
+    });
+
+    socket.on("message", (data) => {
+      let messa = messages;
+      messa.push(data);
+      setMessages(messa);
+      setMessageText("");
+    });
+  }, [socket]);
+
   async function EndCall() {
     setTwilioToken(null);
     window.location.href = "/schedules";
@@ -102,6 +136,15 @@ const Classroom = () => {
     setIsAudioOn(!on);
   }
 
+  async function SendMessage(messagedata) {
+    socket.emit("chat", {
+      roomname: sessionid,
+      username: auth.name,
+      userid: auth.id,
+      messagetext: messagedata,
+    });
+  }
+
   return (
     <>
       <div className="container">
@@ -109,23 +152,46 @@ const Classroom = () => {
         <div className="topBg"></div>
         <div className="innerContain">
           <div className="frameLeft1 FL">
-            {teacherParticipant && teacherParticipant.length > 0 ? (
-              teacherParticipant.map((participant) => (
-                <TeacherParticipant
-                  key={participant.sid}
-                  participant={participant}
-                />
-              ))
-            ) : (
+            {isactivity ? (
               <>
-                <div className="viewImg1">
-                  <div className="whiteBoardBox position-relative">
-                    <img src="/img/novideoImg1.png" />
-                    <div class="novidShow d-flex align-items-center justify-content-center">
-                      <img src="/img/novideoImg1Inner.svg" />
-                    </div>
+                <div class="innHeader">
+                  <h2>White board</h2>
+                </div>
+                <div class="viewImg1">
+                  <div class="whiteBoardBox">
+                    <iframe
+                      src={
+                        "https://whiteboard.fahm-technologies.com/?whiteboardid=67c215e2-f2f4-49da-9c18-2f0df7c6fe81"
+                      }
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
                   </div>
                 </div>
+              </>
+            ) : (
+              <>
+                {teacherParticipant && teacherParticipant.length > 0 ? (
+                  teacherParticipant.map((participant) => (
+                    <TeacherParticipant
+                      key={participant.sid}
+                      participant={participant}
+                    />
+                  ))
+                ) : (
+                  <>
+                    <div className="viewImg1">
+                      <div className="whiteBoardBox position-relative">
+                        <img src="/img/novideoImg1.png" />
+                        <div class="novidShow d-flex align-items-center justify-content-center">
+                          <img src="/img/novideoImg1Inner.svg" />
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </>
             )}
           </div>
@@ -133,77 +199,84 @@ const Classroom = () => {
           <div className="frameRight1 FR">
             <div className="viewTabs1">
               <div className="tab-content" id="myTabContent">
+                {isactivity && (
+                  <div
+                    className={
+                      currenttab === 3
+                        ? "tab-pane fade show active"
+                        : "tab-pane fade"
+                    }
+                    id="teamList"
+                    role="tabpanel"
+                    aria-labelledby="teamList-tab"
+                  >
+                    <ul class="whiteListMain">
+                      <li>
+                        {teacherParticipant && teacherParticipant.length > 0 ? (
+                          teacherParticipant.map((participant) => (
+                            <TeacherNormalView
+                              key={participant.sid}
+                              participant={participant}
+                            />
+                          ))
+                        ) : (
+                          <>
+                            <div className="whiteBoardBox position-relative">
+                              <img src="/img/novideoImg1.png" />
+                              <div class="novidShow d-flex align-items-center justify-content-center">
+                                <img src="/img/novideoImg1Inner.svg" />
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </li>
+
+                      <li>
+                        {room ? (
+                          <LocalParticipant
+                            key={room.localParticipant.sid}
+                            participant={room.localParticipant}
+                            isaudioon={isaudioon}
+                            isvideoon={isvideoon}
+                          />
+                        ) : (
+                          <ParticipantNotConnected />
+                        )}
+                      </li>
+
+                      <div class="clear"></div>
+                    </ul>
+                  </div>
+                )}
+
                 <div
-                  className="tab-pane fade show active"
+                  className={
+                    currenttab === 1
+                      ? "tab-pane fade show active"
+                      : "tab-pane fade"
+                  }
                   id="studList"
                   role="tabpanel"
                   aria-labelledby="studList-tab"
                 >
                   <ul className="studList studList2 studList3">
-                    {room ? (
-                      <LocalParticipant
-                        key={room.localParticipant.sid}
-                        participant={room.localParticipant}
-                        isaudioon={isaudioon}
-                        isvideoon={isvideoon}
-                      />
-                    ) : (
-                      <li>
-                        <div className="studListBox position-relative d-flex align-items-center justify-content-center">
-                          <img
-                            src="/img/novideoImg1.png"
-                            style={{
-                              height: "100%",
-                              width: "100%",
-                              zIndex: "1",
-                            }}
-                          />
-                          <div class="novidShow d-flex align-items-center justify-content-center">
-                            <img
-                              src="/img/novideoImg1Inner.svg"
-                              style={{ zIndex: "2" }}
-                            />
-                          </div>
-                        </div>
-                      </li>
-                    )}
+                    <li>
+                      {room ? (
+                        <LocalParticipant
+                          key={room.localParticipant.sid}
+                          participant={room.localParticipant}
+                          isaudioon={isaudioon}
+                          isvideoon={isvideoon}
+                        />
+                      ) : (
+                        <ParticipantNotConnected />
+                      )}
+                    </li>
                     {remoteParticipants}
                     {Array.from(Array(7 - participants.length), (e, i) => {
                       return (
                         <li>
-                          <div className="studListBox position-relative d-flex align-items-center justify-content-center">
-                            <img
-                              src="/img/novideoImg1.png"
-                              style={{
-                                height: "100%",
-                                width: "100%",
-                                zIndex: "1",
-                              }}
-                            />
-                            <div class="novidShow d-flex align-items-center justify-content-center">
-                              <img
-                                src="/img/novideoImg1Inner.svg"
-                                style={{ zIndex: "2" }}
-                              />
-                            </div>
-                            {/* <div className="liveIcon">
-                          <a href="#">
-                            <img src="/img/liveIcon.svg" />
-                          </a>
-                        </div>
-                        <a href="#" className="micLink"></a>
-                        <a href="#" className="vidLink"></a>
-                        <a
-                          href="activity-matching.html"
-                          className="stuPlusLink"
-                        ></a>
-                        <div className="stuImgBox1">
-                          <img src="/img/stuImg3.png" />
-                        </div>
-                        <div className="stuName stuName1">
-                          <span> Joseph M</span>
-                        </div> */}
-                          </div>
+                          <ParticipantNotConnected />
                         </li>
                       );
                     })}
@@ -211,61 +284,55 @@ const Classroom = () => {
                   </ul>
                 </div>
                 <div
-                  className="tab-pane fade"
+                  className={
+                    currenttab === 2
+                      ? "tab-pane fade show active"
+                      : "tab-pane fade"
+                  }
                   id="chatList"
                   role="tabpanel"
                   aria-labelledby="chatList-tab"
                 >
-                  <div className="chatList">
-                    <div className="text-center">
-                      <h2>Today</h2>
-                    </div>
-
-                    <ul className="">
-                      <li className="chatListBoxes">
-                        <img src="img/chatIcon2.png" className="chatListImg" />
-                        <div className="chatListCont">
-                          <h3>
-                            {" "}
-                            <strong>Teacher</strong> <span>12:16PM</span>
-                          </h3>
-                          <p>
-                            Hi Kelly you have not maintaining the discipline in
-                            the className
-                          </p>
-                        </div>
-                        <div className="clear"></div>
-                      </li>
-
-                      <li className="chatListBoxes chatListBoxes2">
-                        <img src="img/chatIcon1.png" className="chatListImg" />
-                        <div className="chatListCont">
-                          <h3>
-                            {" "}
-                            <strong>Teacher</strong> <span>12:16PM</span>
-                          </h3>
-                          <p>
-                            Hi Kelly you have not maintaining the discipline in
-                            the className
-                          </p>
-                        </div>
-                        <div className="clear"></div>
-                      </li>
-                    </ul>
-
-                    <div className="chatBoxBtn">
-                      <button type="button">
-                        <img src="img/chatBtn.png" />
-                      </button>
-                      <textarea className="form-control">Chat here..</textarea>
-                    </div>
-                  </div>
+                  <Chat
+                    messages={messages}
+                    auth={auth}
+                    SendMessage={SendMessage}
+                    messagetext={messagetext}
+                    setMessageText={setMessageText}
+                  />
                 </div>
               </div>
-              <ul className="nav nav-tabs tabsNew" id="myTab" role="tablist">
+              <ul
+                className={
+                  isactivity
+                    ? "nav nav-tabs tabsNew tabsNew2"
+                    : "nav nav-tabs tabsNew"
+                }
+                id="myTab"
+                role="tablist"
+              >
+                {isactivity && (
+                  <li class="nav-item" role="presentation">
+                    <a
+                      className={
+                        currenttab === 3 ? "nav-link active" : "nav-link"
+                      }
+                      id="teamList-tab"
+                      data-toggle="tab"
+                      href="#teamList"
+                      role="tab"
+                      aria-controls="teamList"
+                      aria-selected="true"
+                    >
+                      List
+                    </a>
+                  </li>
+                )}
                 <li className="nav-item" role="presentation">
                   <a
-                    className="nav-link active"
+                    className={
+                      currenttab === 1 ? "nav-link active" : "nav-link"
+                    }
                     id="studList-tab"
                     data-toggle="tab"
                     href="#studList"
@@ -278,7 +345,9 @@ const Classroom = () => {
                 </li>
                 <li className="nav-item" role="presentation">
                   <a
-                    className="nav-link"
+                    className={
+                      currenttab === 2 ? "nav-link active" : "nav-link"
+                    }
                     id="chatList-tab"
                     data-toggle="tab"
                     href="#chatList"

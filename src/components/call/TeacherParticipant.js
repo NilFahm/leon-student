@@ -86,7 +86,7 @@ const TeacherParticipant = ({ participant }) => {
     <>
       <div class="liveIcon">
         <a href="#">
-          <img src="img/liveIcon.svg" />
+          <img src="/img/liveIcon.svg" />
         </a>
       </div>
       <div class="viewImg1">

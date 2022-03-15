@@ -1,8 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../utils/useLocalStorage";
 
 const PrivateHeader = () => {
-  const [auth] = useLocalStorage("auth", {});
+  const [auth, setAuth] = useLocalStorage("auth", {});
+
+  async function HandleLogout() {
+    setAuth(null);
+    window.location.href = "/login";
+  }
   return (
     <header>
       <a href="#" class="logoBox">
@@ -32,6 +38,9 @@ const PrivateHeader = () => {
               <a class="dropdown-item" href="#">
                 Settings
               </a>
+              <Link class="dropdown-item" to="" onClick={(e) => HandleLogout()}>
+                Logout
+              </Link>
             </div>
           </div>
         </div>

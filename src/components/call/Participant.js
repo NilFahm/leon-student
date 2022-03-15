@@ -90,14 +90,14 @@ const Participant = ({ participant }) => {
         <video ref={videoRef} autoPlay={true} />
         <audio ref={audioRef} autoPlay={true} muted={true} />
       </div> */}
-      <li>
+      {/* <li> */}
         <div className="studListBox">
           <div className="liveIcon">
             <a href="#">
               <img src="/img/liveIcon.svg" />
             </a>
           </div>
-          <a href="#" className="micLink"></a>
+          <a href="#" className={isaudioon ? "micLink" : "micLink active"}></a>
           <a href="#" className="vidLink"></a>
           <a href="activity-matching.html" className="stuPlusLink"></a>
           <div className="stuImgBox1">
@@ -120,7 +120,7 @@ const Participant = ({ participant }) => {
             <span>{participant.identity}</span>
           </div>
         </div>
-      </li>
+      {/* </li> */}
     </>
   );
 };

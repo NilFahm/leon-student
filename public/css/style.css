@@ -167,8 +167,6 @@ h1{ font-size: 220%; color: #fff; font-weight: 600 }
 .nav-tabs.tabsNew li a#chatList-tab.active{border-top: solid 1px #f5fafb;  background:#f5fafb url(../img/chat1.svg) no-repeat center center !important }
 .nav-tabs.tabsNew li a#chatList-tab{border-left: solid 1px #afc9cf; background:#c7e4eb url(../img/chat2.svg) no-repeat center center !important; position: relative; }
 
-.nav-tabs.tabsNew li a#chatList-tab:before{ width: 15px; height: 15px; background: #ff0000; border-radius: 10px; content: '1'; display: block; position: absolute; right: 30%; margin-top: 4px; font-size: 11px; color: #fff; text-align: center; line-height: 15px;}
-
 .nav-tabs.tabsNew li a#studList-tab.active{ border-top: solid 1px #f5fafb; background:#f5fafb url(../img/list1.svg) no-repeat center center !important }
 .nav-tabs.tabsNew li a#studList-tab{border-top: solid 1px #afc9cf; border-right:0; border-left: solid 1px #fff; border-bottom: solid 1px #fff;  background:#c7e4eb url(../img/list2.svg) no-repeat center center !important }
 

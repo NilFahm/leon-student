@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
+const TeacherNormalView = ({ participant }) => {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
+  const [isaudioon, setIsAudioOn] = useState(true);
+  const [isvideoon, setIsVideoOn] = useState(true);
   const videoRef = useRef();
   const audioRef = useRef();
 
@@ -13,6 +15,7 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
 
   useEffect(() => {
     const trackSubscribed = (track) => {
+      debugger;
       if (track.kind === "video") {
         setVideoTracks((videoTracks) => [...videoTracks, track]);
       } else {
@@ -20,19 +23,28 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
       }
     };
 
-    const trackEnabled = (track) => {
-      debugger;
-    };
-
-    const trackDisabled = (track) => {
-      debugger;
-    };
-
     const trackUnsubscribed = (track) => {
+      debugger;
       if (track.kind === "video") {
         setVideoTracks((videoTracks) => videoTracks.filter((v) => v !== track));
       } else {
         setAudioTracks((audioTracks) => audioTracks.filter((a) => a !== track));
+      }
+    };
+
+    const trackEnabled = (track) => {
+      if (track.kind === "video") {
+        setIsVideoOn(true);
+      } else if (track.kind === "audio") {
+        setIsAudioOn(true);
+      }
+    };
+
+    const trackDisabled = (track) => {
+      if (track.kind === "video") {
+        setIsVideoOn(false);
+      } else if (track.kind === "audio") {
+        setIsAudioOn(false);
       }
     };
 
@@ -73,7 +85,12 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
 
   return (
     <>
-      {/* <li> */}
+      {/* <div className="participant">
+        <h3>{participant.identity}</h3>
+        <video ref={videoRef} autoPlay={true} />
+        <audio ref={audioRef} autoPlay={true} muted={true} />
+      </div> */}
+      <li>
         <div className="studListBox">
           <div className="liveIcon">
             <a href="#">
@@ -81,8 +98,8 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
             </a>
           </div>
           <a href="#" className={isaudioon ? "micLink" : "micLink active"}></a>
-          {/* <a href="#" className="vidLink"></a>
-          <a href="activity-matching.html" className="stuPlusLink"></a> */}
+          <a href="#" className="vidLink"></a>
+          <a href="activity-matching.html" className="stuPlusLink"></a>
           <div className="stuImgBox1">
             {!isvideoon && (
               <>
@@ -103,9 +120,9 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
             <span>{participant.identity}</span>
           </div>
         </div>
-      {/* </li> */}
+      </li>
     </>
   );
 };
 
-export default LocalParticipant;
+export default TeacherNormalView;
