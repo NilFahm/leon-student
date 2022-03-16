@@ -16,25 +16,29 @@ const Classroom = () => {
   const [auth] = useLocalStorage("auth", {});
   const { sessionid } = useParams();
   const { GetRoomToken } = useTwilioData();
-  const [twiliotoken, setTwilioToken] = useState(null);
+  const [twiliotoken, setTwilioToken] = useState("");
   const [room, setRoom] = useState(null);
   const [participants, setParticipants] = useState([]);
   const [isvideoon, setIsVideoOn] = useState(true);
   const [isaudioon, setIsAudioOn] = useState(true);
   const [isactivity, setIsActivity] = useState(false);
-  const [activity, setActivity] = useState(null);
+  const [activityname, setActivity] = useState(null);
   const [messages, setMessages] = useState([]);
   const [messagetext, setMessageText] = useState("");
   const [currenttab, setCurrentTab] = useState(1);
 
   const socket = io.connect("https://socket.fahm-technologies.com");
+ 
+  useEffect(() => {
+   console.log("activityname", activityname);
+  }, [activityname]);
 
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
-      const response = await GetRoomToken(auth.token, sessionid);
-      setTwilioToken(response.authToken);
-      const joindata = { userid: auth.userid, roomname: sessionid };
-      socket.emit("joinRoom", joindata);
+      // const response = await GetRoomToken(auth.token, sessionid);
+      // setTwilioToken(response.authToken);
+      const joindata = { userid: auth.id, roomname: sessionid };
+      socket.emit("joinroom", joindata);
     }
   }, [auth]);
 
@@ -50,46 +54,60 @@ const Classroom = () => {
   );
 
   useEffect(() => {
-    const participantConnected = (participant) => {
-      setParticipants((prevParticipants) => [...prevParticipants, participant]);
-    };
-    const participantDisconnected = (participant) => {
-      setParticipants((prevParticipants) =>
-        prevParticipants.filter((p) => p !== participant)
-      );
-    };
+    if (twiliotoken && twiliotoken !== "") {
+      const participantConnected = (participant) => {
+        setParticipants((prevParticipants) => [
+          ...prevParticipants,
+          participant,
+        ]);
+      };
+      const participantDisconnected = (participant) => {
+        setParticipants((prevParticipants) =>
+          prevParticipants.filter((p) => p !== participant)
+        );
+      };
 
-    Video.connect(twiliotoken, {
-      name: sessionid,
-    }).then((room) => {
-      setRoom(room);
-      room.on("participantConnected", participantConnected);
-      room.on("participantDisconnected", participantDisconnected);
-      room.participants.forEach(participantConnected);
-    });
-    return () => {
-      setRoom((currentRoom) => {
-        if (currentRoom && currentRoom.localParticipant.state === "connected") {
-          currentRoom.localParticipant.tracks.forEach(function (
-            trackPublication
-          ) {
-            trackPublication.track.stop();
-          });
-          currentRoom.disconnect();
-          return null;
-        } else {
-          return currentRoom;
-        }
+      Video.connect(twiliotoken, {
+        name: sessionid,
+      }).then((room) => {
+        setRoom(room);
+        room.on("participantConnected", participantConnected);
+        room.on("participantDisconnected", participantDisconnected);
+        room.participants.forEach(participantConnected);
       });
-    };
+      return () => {
+        setRoom((currentRoom) => {
+          if (
+            currentRoom &&
+            currentRoom.localParticipant.state === "connected"
+          ) {
+            currentRoom.localParticipant.tracks.forEach(function (
+              trackPublication
+            ) {
+              trackPublication.track.stop();
+            });
+            currentRoom.disconnect();
+            return null;
+          } else {
+            return currentRoom;
+          }
+        });
+      };
+    }
   }, [sessionid, twiliotoken]);
 
   useEffect(() => {
     socket.on("activity", (data) => {
-      if (data.activity !== activity && data.activity !== "startcall") {
+      if (
+        data.activity !== activityname &&
+        data.activity !== "startcall" &&
+        data.activity !== "endcall"
+      ) {
         setActivity(data.activity);
         setIsActivity(true);
         setCurrentTab(3);
+      } else if (data.activity === "endcall") {
+        EndCall();
       } else {
         setActivity(null);
         setIsActivity(false);
@@ -106,7 +124,7 @@ const Classroom = () => {
   }, [socket]);
 
   async function EndCall() {
-    setTwilioToken(null);
+    setTwilioToken("");
     window.location.href = "/schedules";
   }
 
