@@ -25,12 +25,12 @@ const Classroom = () => {
   const [activityname, setActivity] = useState(null);
   const [messages, setMessages] = useState([]);
   const [messagetext, setMessageText] = useState("");
-  const [currenttab, setCurrentTab] = useState(1);
+  const [currenttab, setCurrentTab] = useState(null);
 
   const socket = io.connect("https://socket.fahm-technologies.com");
- 
+
   useEffect(() => {
-   console.log("activityname", activityname);
+    console.log("activityname", activityname);
   }, [activityname]);
 
   useEffect(async () => {
@@ -39,6 +39,7 @@ const Classroom = () => {
       setTwilioToken(response.authToken);
       const joindata = { userid: auth.id, roomname: sessionid };
       socket.emit("joinroom", joindata);
+      setCurrentTab(1);
     }
   }, [auth]);
 
@@ -105,7 +106,9 @@ const Classroom = () => {
       ) {
         setActivity(data.activity);
         setIsActivity(true);
-        setCurrentTab(3);
+        if (currenttab === 1) {
+          setCurrentTab(3);
+        }
       } else if (data.activity === "endcall") {
         EndCall();
       } else {
@@ -154,12 +157,12 @@ const Classroom = () => {
     setIsAudioOn(!on);
   }
 
-  async function SendMessage(messagedata) {
+  async function SendMessage() {
     socket.emit("chat", {
       roomname: sessionid,
       username: auth.name,
       userid: auth.id,
-      messagetext: messagedata,
+      messagetext: messagetext,
     });
   }
 
@@ -291,16 +294,20 @@ const Classroom = () => {
                       )}
                     </li>
                     {remoteParticipants}
-                    {Array.from(Array(7 - participants.length), (e, i) => {
-                      return (
-                        <li>
-                          <ParticipantNotConnected />
-                        </li>
-                      );
-                    })}
+                    {Array.from(
+                      Array(7 - remoteParticipants.length),
+                      (e, i) => {
+                        return (
+                          <li>
+                            <ParticipantNotConnected />
+                          </li>
+                        );
+                      }
+                    )}
                     <div className="clear"></div>
                   </ul>
                 </div>
+
                 <div
                   className={
                     currenttab === 2
@@ -346,6 +353,7 @@ const Classroom = () => {
                     </a>
                   </li>
                 )}
+
                 <li className="nav-item" role="presentation">
                   <a
                     className={
@@ -361,6 +369,7 @@ const Classroom = () => {
                     List
                   </a>
                 </li>
+
                 <li className="nav-item" role="presentation">
                   <a
                     className={

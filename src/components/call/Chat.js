@@ -1,10 +1,6 @@
 import React from "react";
 
 const Chat = ({ messages, auth, SendMessage, messagetext, setMessageText }) => {
-  async function HandleSendMessage() {
-    let message = messagetext;
-    SendMessage(message);
-  }
   return (
     <>
       <div className="chatList">
@@ -52,7 +48,7 @@ const Chat = ({ messages, auth, SendMessage, messagetext, setMessageText }) => {
         </ul>
 
         <div className="chatBoxBtn">
-          <button type="button" onClick={(e) => HandleSendMessage()}>
+          <button type="button" onClick={(e) => SendMessage()}>
             <img src="/img/chatBtn.png" />
           </button>
           <textarea
