@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocalStorage } from "../../utils/useLocalStorage";
 
-const Chat = ({ messages, auth, SendMessage, messagetext, setMessageText }) => {
+const Chat = ({ socket, sessionid }) => {
+  const [auth] = useLocalStorage("auth", {});
+  const [messages, setMessages] = useState([]);
+  const [messagetext, setMessageText] = useState("");
+
+  useEffect(() => {
+    window.localStorage.removeItem("messages");
+  }, []);
+
+  async function SendMessage() {
+    socket.emit("chat", {
+      roomname: sessionid,
+      username: auth.name,
+      userid: auth.id,
+      messagetext: messagetext,
+    });
+  }
+
+  useEffect(() => {
+    socket.on("message", (data) => {
+      let messa = JSON.parse(window.localStorage.getItem("messages"));
+      if (!messa) {
+        window.localStorage.setItem("messages", JSON.stringify([]));
+        messa = JSON.parse(window.localStorage.getItem("messages"));
+      }
+      messa.push(data);
+      window.localStorage.setItem("messages", JSON.stringify(messa));
+      setMessages(JSON.parse(window.localStorage.getItem("messages")));
+      setMessageText("");
+    });
+  }, [socket]);
+
   return (
     <>
       <div className="chatList">

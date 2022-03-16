@@ -23,20 +23,14 @@ const Classroom = () => {
   const [isaudioon, setIsAudioOn] = useState(true);
   const [isactivity, setIsActivity] = useState(false);
   const [activityname, setActivity] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [messagetext, setMessageText] = useState("");
   const [currenttab, setCurrentTab] = useState(null);
 
   const socket = io.connect("https://socket.fahm-technologies.com");
 
-  useEffect(() => {
-    console.log("activityname", activityname);
-  }, [activityname]);
-
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
-      const response = await GetRoomToken(auth.token, sessionid);
-      setTwilioToken(response.authToken);
+      // const response = await GetRoomToken(auth.token, sessionid);
+      // setTwilioToken(response.authToken);
       const joindata = { userid: auth.id, roomname: sessionid };
       socket.emit("joinroom", joindata);
       setCurrentTab(1);
@@ -46,8 +40,9 @@ const Classroom = () => {
   const remoteParticipants = participants
     .filter((x) => x.identity !== "azizi@leonclassroom.com")
     .map((participant) => (
-      // <></>
-      <Participant key={participant.sid} participant={participant} />
+      <li>
+        <Participant key={participant.sid} participant={participant} />
+      </li>
     ));
 
   const teacherParticipant = participants.filter(
@@ -117,13 +112,6 @@ const Classroom = () => {
         setCurrentTab(1);
       }
     });
-
-    socket.on("message", (data) => {
-      let messa = messages;
-      messa.push(data);
-      setMessages(messa);
-      setMessageText("");
-    });
   }, [socket]);
 
   async function EndCall() {
@@ -155,15 +143,6 @@ const Classroom = () => {
       });
     }
     setIsAudioOn(!on);
-  }
-
-  async function SendMessage() {
-    socket.emit("chat", {
-      roomname: sessionid,
-      username: auth.name,
-      userid: auth.id,
-      messagetext: messagetext,
-    });
   }
 
   return (
@@ -318,13 +297,7 @@ const Classroom = () => {
                   role="tabpanel"
                   aria-labelledby="chatList-tab"
                 >
-                  <Chat
-                    messages={messages}
-                    auth={auth}
-                    SendMessage={SendMessage}
-                    messagetext={messagetext}
-                    setMessageText={setMessageText}
-                  />
+                  <Chat socket={socket} sessionid={sessionid} />
                 </div>
               </div>
               <ul
@@ -407,23 +380,29 @@ const Classroom = () => {
       </div>
 
       <div class="handLinks">
-        <Link
-          to=""
-          className={isaudioon ? "linkMic" : "linkMic active"}
-          onClick={(e) => AudioOnOff(isaudioon)}
-        ></Link>
+        {room && (
+          <Link
+            to=""
+            className={isaudioon ? "linkMic" : "linkMic active"}
+            onClick={(e) => AudioOnOff(isaudioon)}
+          ></Link>
+        )}
         <Link
           to=""
           className="linkEnd active"
           onClick={(e) => EndCall()}
           style={{ cursor: "pointer" }}
         ></Link>
-        <Link
-          to=""
-          className={isvideoon ? "linkVid" : "linkVid active"}
-          onClick={(e) => VideoOnOff(isvideoon)}
-        ></Link>
-        <a href="#" class="linkHand"></a>
+        {room && (
+          <>
+            <Link
+              to=""
+              className={isvideoon ? "linkVid" : "linkVid active"}
+              onClick={(e) => VideoOnOff(isvideoon)}
+            ></Link>
+            <a href="#" class="linkHand"></a>
+          </>
+        )}
       </div>
     </>
   );
