@@ -32,21 +32,21 @@ const Participant = ({ participant }) => {
       }
     };
 
-    const trackEnabled = (track) => {
-      if (track.kind === "video") {
-        setIsVideoOn(true);
-      } else if (track.kind === "audio") {
-        setIsAudioOn(true);
-      }
-    };
+    // const trackEnabled = (track) => {
+    //   if (track.kind === "video") {
+    //     setIsVideoOn(true);
+    //   } else if (track.kind === "audio") {
+    //     setIsAudioOn(true);
+    //   }
+    // };
 
-    const trackDisabled = (track) => {
-      if (track.kind === "video") {
-        setIsVideoOn(false);
-      } else if (track.kind === "audio") {
-        setIsAudioOn(false);
-      }
-    };
+    // const trackDisabled = (track) => {
+    //   if (track.kind === "video") {
+    //     setIsVideoOn(false);
+    //   } else if (track.kind === "audio") {
+    //     setIsAudioOn(false);
+    //   }
+    // };
 
     setVideoTracks(trackpubsToTracks(participant.videoTracks));
     setAudioTracks(trackpubsToTracks(participant.audioTracks));
@@ -67,9 +67,12 @@ const Participant = ({ participant }) => {
     const videoTrack = videoTracks[0];
     if (videoTrack) {
       videoTrack.attach(videoRef.current);
+      setIsVideoOn(videoTrack.isEnabled);
       return () => {
         videoTrack.detach();
       };
+    } else {
+      setIsVideoOn(false);
     }
   }, [videoTracks]);
 
@@ -77,50 +80,46 @@ const Participant = ({ participant }) => {
     const audioTrack = audioTracks[0];
     if (audioTrack) {
       audioTrack.attach(audioRef.current);
+      setIsAudioOn(audioTrack.isEnabled);
       return () => {
         audioTrack.detach();
       };
+    } else {
+      setIsAudioOn(false);
     }
   }, [audioTracks]);
 
   return (
     <>
-      {/* <div className="participant">
-        <h3>{participant.identity}</h3>
-        <video ref={videoRef} autoPlay={true} />
-        <audio ref={audioRef} autoPlay={true} muted={true} />
-      </div> */}
-      {/* <li> */}
-        <div className="studListBox">
-          <div className="liveIcon">
-            <a href="#">
-              <img src="/img/liveIcon.svg" />
-            </a>
-          </div>
-          <a href="#" className={isaudioon ? "micLink" : "micLink active"}></a>
-          <a href="#" className="vidLink"></a>
-          <a href="activity-matching.html" className="stuPlusLink"></a>
-          <div className="stuImgBox1">
-            {!isvideoon && (
-              <>
-                <div class="novidShow d-flex align-items-center justify-content-center">
-                  <img src="/img/novideoImg2Inner.svg" />
-                </div>
-                <img src="/img/novideoImg2.png" />
-              </>
-            )}
-            <video
-              ref={videoRef}
-              autoPlay={true}
-              style={{ display: isvideoon ? "block" : "none" }}
-            />
-            <audio ref={audioRef} autoPlay={true} />
-          </div>
-          <div className="stuName stuName3">
-            <span>{participant.identity}</span>
-          </div>
+      <div className="studListBox">
+        <div className="liveIcon">
+          <a href="#">
+            <img src="/img/liveIcon.svg" />
+          </a>
         </div>
-      {/* </li> */}
+        <a href="#" className={isaudioon ? "micLink" : "micLink active"}></a>
+        <a href="#" className="vidLink"></a>
+        <a href="activity-matching.html" className="stuPlusLink"></a>
+        <div className="stuImgBox1">
+          {!isvideoon && (
+            <>
+              <div class="novidShow d-flex align-items-center justify-content-center">
+                <img src="/img/novideoImg2Inner.svg" />
+              </div>
+              <img src="/img/novideoImg2.png" />
+            </>
+          )}
+          <video
+            ref={videoRef}
+            autoPlay={true}
+            style={{ display: isvideoon ? "block" : "none" }}
+          />
+          <audio ref={audioRef} autoPlay={true} />
+        </div>
+        <div className="stuName stuName3">
+          <span>{participant.identity}</span>
+        </div>
+      </div>
     </>
   );
 };

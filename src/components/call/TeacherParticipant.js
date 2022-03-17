@@ -31,29 +31,29 @@ const TeacherParticipant = ({ participant }) => {
       }
     };
 
-    const trackEnabled = (track) => {
-      if (track.kind === "video") {
-        setIsVideoOn(true);
-      } else if (track.kind === "audio") {
-        setIsAudioOn(true);
-      }
-    };
+    // const trackEnabled = (track) => {
+    //   if (track.kind === "video") {
+    //     setIsVideoOn(true);
+    //   } else if (track.kind === "audio") {
+    //     setIsAudioOn(true);
+    //   }
+    // };
 
-    const trackDisabled = (track) => {
-      if (track.kind === "video") {
-        setIsVideoOn(false);
-      } else if (track.kind === "audio") {
-        setIsAudioOn(false);
-      }
-    };
+    // const trackDisabled = (track) => {
+    //   if (track.kind === "video") {
+    //     setIsVideoOn(false);
+    //   } else if (track.kind === "audio") {
+    //     setIsAudioOn(false);
+    //   }
+    // };
 
     setVideoTracks(trackpubsToTracks(participant.videoTracks));
     setAudioTracks(trackpubsToTracks(participant.audioTracks));
 
     participant.on("trackSubscribed", trackSubscribed);
     participant.on("trackUnsubscribed", trackUnsubscribed);
-    participant.on("trackEnabled", trackEnabled);
-    participant.on("trackDisabled", trackDisabled);
+    participant.on("trackEnabled", trackSubscribed);
+    participant.on("trackDisabled", trackUnsubscribed);
 
     return () => {
       setVideoTracks([]);
@@ -65,20 +65,26 @@ const TeacherParticipant = ({ participant }) => {
   useEffect(() => {
     const videoTrack = videoTracks[0];
     if (videoTrack) {
+      setIsVideoOn(videoTrack.isEnabled);
       videoTrack.attach(videoRef.current);
       return () => {
         videoTrack.detach();
       };
+    } else {
+      setIsVideoOn(false);
     }
   }, [videoTracks]);
 
   useEffect(() => {
     const audioTrack = audioTracks[0];
     if (audioTrack) {
+      setIsAudioOn(audioTrack.isEnabled);
       audioTrack.attach(audioRef.current);
       return () => {
         audioTrack.detach();
       };
+    } else {
+      setIsAudioOn(false);
     }
   }, [audioTracks]);
 

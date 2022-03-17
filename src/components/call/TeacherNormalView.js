@@ -32,29 +32,29 @@ const TeacherNormalView = ({ participant }) => {
       }
     };
 
-    const trackEnabled = (track) => {
-      if (track.kind === "video") {
-        setIsVideoOn(true);
-      } else if (track.kind === "audio") {
-        setIsAudioOn(true);
-      }
-    };
+    // const trackEnabled = (track) => {
+    //   if (track.kind === "video") {
+    //     setIsVideoOn(true);
+    //   } else if (track.kind === "audio") {
+    //     setIsAudioOn(true);
+    //   }
+    // };
 
-    const trackDisabled = (track) => {
-      if (track.kind === "video") {
-        setIsVideoOn(false);
-      } else if (track.kind === "audio") {
-        setIsAudioOn(false);
-      }
-    };
+    // const trackDisabled = (track) => {
+    //   if (track.kind === "video") {
+    //     setIsVideoOn(false);
+    //   } else if (track.kind === "audio") {
+    //     setIsAudioOn(false);
+    //   }
+    // };
 
     setVideoTracks(trackpubsToTracks(participant.videoTracks));
     setAudioTracks(trackpubsToTracks(participant.audioTracks));
 
     participant.on("trackSubscribed", trackSubscribed);
     participant.on("trackUnsubscribed", trackUnsubscribed);
-    participant.on("trackEnabled", trackEnabled);
-    participant.on("trackDisabled", trackDisabled);
+    participant.on("trackEnabled", trackSubscribed);
+    participant.on("trackDisabled", trackUnsubscribed);
 
     return () => {
       setVideoTracks([]);
@@ -67,9 +67,12 @@ const TeacherNormalView = ({ participant }) => {
     const videoTrack = videoTracks[0];
     if (videoTrack) {
       videoTrack.attach(videoRef.current);
+      setIsVideoOn(videoTrack.isEnabled);
       return () => {
         videoTrack.detach();
       };
+    } else {
+      setIsVideoOn(false);
     }
   }, [videoTracks]);
 
@@ -77,9 +80,12 @@ const TeacherNormalView = ({ participant }) => {
     const audioTrack = audioTracks[0];
     if (audioTrack) {
       audioTrack.attach(audioRef.current);
+      setIsAudioOn(audioTrack.isEnabled);
       return () => {
         audioTrack.detach();
       };
+    } else {
+      setIsAudioOn(false);
     }
   }, [audioTracks]);
 
