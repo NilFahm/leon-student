@@ -59,7 +59,7 @@ const TeacherNormalView = ({ participant }) => {
     return () => {
       setVideoTracks([]);
       setAudioTracks([]);
-      // participant.removeAllListeners();
+      participant.removeAllListeners();
     };
   }, [participant]);
 
@@ -91,11 +91,6 @@ const TeacherNormalView = ({ participant }) => {
 
   return (
     <>
-      {/* <div className="participant">
-        <h3>{participant.identity}</h3>
-        <video ref={videoRef} autoPlay={true} />
-        <audio ref={audioRef} autoPlay={true} muted={true} />
-      </div> */}
       <li>
         <div className="studListBox">
           <div className="liveIcon">

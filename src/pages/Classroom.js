@@ -23,7 +23,7 @@ const Classroom = () => {
   const [isaudioon, setIsAudioOn] = useState(true);
   const [isactivity, setIsActivity] = useState(false);
   const [activityname, setActivity] = useState(null);
-  const [currenttab, setCurrentTab] = useState(null);
+  const [currenttab, setCurrentTab] = useState(1);
 
   const socket = io.connect("https://socket.fahm-technologies.com");
 

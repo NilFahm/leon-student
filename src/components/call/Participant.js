@@ -59,7 +59,7 @@ const Participant = ({ participant }) => {
     return () => {
       setVideoTracks([]);
       setAudioTracks([]);
-      // participant.removeAllListeners();
+      participant.removeAllListeners();
     };
   }, [participant]);
 
