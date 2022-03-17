@@ -53,8 +53,8 @@ const Participant = ({ participant }) => {
 
     participant.on("trackSubscribed", trackSubscribed);
     participant.on("trackUnsubscribed", trackUnsubscribed);
-    participant.on("trackEnabled", trackEnabled);
-    participant.on("trackDisabled", trackDisabled);
+    participant.on("trackEnabled", trackSubscribed);
+    participant.on("trackDisabled", trackUnsubscribed);
 
     return () => {
       setVideoTracks([]);
