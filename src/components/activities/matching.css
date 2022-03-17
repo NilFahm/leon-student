@@ -62,7 +62,7 @@
   filter: drop-shadow(5px 5px 5px lightgreen);
 }
 .ring {
-  z-index: 1;
+  z-index: 10;
   position: absolute;
   height: 30% !important;
   width: auto !important;
@@ -109,7 +109,7 @@
   position: absolute;
   height: 75px !important;
   width: auto;
-  left: 44%;
+  left: 45%;
   top: 24%;
 }
 .wave1 {

@@ -15,7 +15,6 @@ const TeacherNormalView = ({ participant }) => {
 
   useEffect(() => {
     const trackSubscribed = (track) => {
-      debugger;
       if (track.kind === "video") {
         setIsVideoOn(track.isTrackEnabled);
         setVideoTracks((videoTracks) => [...videoTracks, track]);
@@ -26,7 +25,6 @@ const TeacherNormalView = ({ participant }) => {
     };
 
     const trackUnsubscribed = (track) => {
-      debugger;
       if (track.kind === "video") {
         setIsVideoOn(track.isTrackEnabled);
         setVideoTracks((videoTracks) => videoTracks.filter((v) => v !== track));
