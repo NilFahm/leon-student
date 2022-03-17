@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useTwilioData } from "../data/TwilioData";
 import { useLocalStorage } from "../utils/useLocalStorage";
 import Participant from "../components/call/Participant";
@@ -14,6 +14,7 @@ import TeacherNormalView from "../components/call/TeacherNormalView";
 
 const Classroom = () => {
   const [auth] = useLocalStorage("auth", {});
+  const navigate = useNavigate();
   const { sessionid } = useParams();
   const { GetRoomToken } = useTwilioData();
   const [twiliotoken, setTwilioToken] = useState("");
@@ -48,6 +49,10 @@ const Classroom = () => {
   const teacherParticipant = participants.filter(
     (x) => x.identity === "azizi@leonclassroom.com"
   );
+
+  useEffect(() => {
+    navigate("/startcall/"+sessionid);
+  }, [isactivity]);
 
   useEffect(() => {
     if (twiliotoken && twiliotoken !== "") {
@@ -231,18 +236,20 @@ const Classroom = () => {
                         )}
                       </li>
 
-                      <li>
-                        {room ? (
+                      {room ? (
+                        <li>
                           <LocalParticipant
                             key={room.localParticipant.sid}
                             participant={room.localParticipant}
                             isaudioon={isaudioon}
                             isvideoon={isvideoon}
                           />
-                        ) : (
+                        </li>
+                      ) : (
+                        <li>
                           <ParticipantNotConnected />
-                        )}
-                      </li>
+                        </li>
+                      )}
 
                       <div class="clear"></div>
                     </ul>

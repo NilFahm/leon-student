@@ -17,8 +17,10 @@ const TeacherNormalView = ({ participant }) => {
     const trackSubscribed = (track) => {
       debugger;
       if (track.kind === "video") {
+        setIsVideoOn(track.isTrackEnabled);
         setVideoTracks((videoTracks) => [...videoTracks, track]);
       } else {
+        setIsAudioOn(track.isTrackEnabled);
         setAudioTracks((audioTracks) => [...audioTracks, track]);
       }
     };
@@ -26,8 +28,10 @@ const TeacherNormalView = ({ participant }) => {
     const trackUnsubscribed = (track) => {
       debugger;
       if (track.kind === "video") {
+        setIsVideoOn(track.isTrackEnabled);
         setVideoTracks((videoTracks) => videoTracks.filter((v) => v !== track));
       } else {
+        setIsAudioOn(track.isTrackEnabled);
         setAudioTracks((audioTracks) => audioTracks.filter((a) => a !== track));
       }
     };

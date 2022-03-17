@@ -15,7 +15,6 @@ const Participant = ({ participant }) => {
 
   useEffect(() => {
     const trackSubscribed = (track) => {
-      debugger;
       if (track.kind === "video") {
         setVideoTracks((videoTracks) => [...videoTracks, track]);
       } else {
@@ -24,7 +23,6 @@ const Participant = ({ participant }) => {
     };
 
     const trackUnsubscribed = (track) => {
-      debugger;
       if (track.kind === "video") {
         setVideoTracks((videoTracks) => videoTracks.filter((v) => v !== track));
       } else {
