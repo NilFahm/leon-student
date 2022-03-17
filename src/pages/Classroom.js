@@ -11,6 +11,7 @@ import ParticipantNotConnected from "../components/call/ParticipantNotConnected"
 import Chat from "../components/call/Chat";
 import io from "socket.io-client";
 import TeacherNormalView from "../components/call/TeacherNormalView";
+import Matching from "../components/activities/Matching";
 
 const Classroom = () => {
   const [auth] = useLocalStorage("auth", {});
@@ -51,7 +52,7 @@ const Classroom = () => {
   );
 
   useEffect(() => {
-    navigate("/startcall/"+sessionid);
+    navigate("/startcall/" + sessionid);
   }, [isactivity]);
 
   useEffect(() => {
@@ -159,20 +160,33 @@ const Classroom = () => {
           <div className="frameLeft1 FL">
             {isactivity ? (
               <>
-                <div class="innHeader">
-                  <h2>White board</h2>
+                <div className="innHeader" style={{ zIndex: "100" }}>
+                  <h2>
+                    {activityname &&
+                      activityname === "whiteboard" &&
+                      "White Board"}
+                    {activityname && activityname === "matching" && "Matching"}
+                  </h2>
                 </div>
+
                 <div class="viewImg1">
-                  <div class="whiteBoardBox">
-                    <iframe
-                      src={
-                        "https://whiteboard.fahm-technologies.com/?whiteboardid=67c215e2-f2f4-49da-9c18-2f0df7c6fe81"
-                      }
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
+                  <div class="whiteBoardBox position-relative">
+                    {activityname && activityname === "matching" && (
+                      <>
+                        <Matching />
+                      </>
+                    )}{" "}
+                    {activityname && activityname === "whiteboard" && (
+                      <iframe
+                        src={
+                          "https://whiteboard.fahm-technologies.com/?whiteboardid=67c215e2-f2f4-49da-9c18-2f0df7c6fe81"
+                        }
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
               </>
