@@ -20,14 +20,6 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
       }
     };
 
-    const trackEnabled = (track) => {
-      debugger;
-    };
-
-    const trackDisabled = (track) => {
-      debugger;
-    };
-
     const trackUnsubscribed = (track) => {
       if (track.kind === "video") {
         setVideoTracks((videoTracks) => videoTracks.filter((v) => v !== track));
@@ -41,13 +33,13 @@ const LocalParticipant = ({ participant, isaudioon, isvideoon }) => {
 
     participant.on("trackSubscribed", trackSubscribed);
     participant.on("trackUnsubscribed", trackUnsubscribed);
-    participant.on("trackEnabled", trackEnabled);
-    participant.on("trackDisabled", trackDisabled);
+    // participant.on("trackEnabled", trackEnabled);
+    // participant.on("trackDisabled", trackDisabled);
 
     return () => {
       setVideoTracks([]);
       setAudioTracks([]);
-      participant.removeAllListeners();
+      // participant.removeAllListeners();
     };
   }, [participant]);
 

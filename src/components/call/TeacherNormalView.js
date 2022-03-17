@@ -59,7 +59,7 @@ const TeacherNormalView = ({ participant }) => {
     return () => {
       setVideoTracks([]);
       setAudioTracks([]);
-      participant.removeAllListeners();
+      // participant.removeAllListeners();
     };
   }, [participant]);
 
