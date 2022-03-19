@@ -40,11 +40,8 @@ const Schedules = () => {
                   <div class="homeLelvel1">
                     <div class="grauBox">8</div>
                     {/* <div class="levelHead"> Level 01 - Session 02</div> */}
-                    <div class="levelHead">
-                      {scheduledata.levelName} - Session{" "}
-                      {scheduledata.sessionId}
-                    </div>
-                    <h3>Smart Active</h3>
+                    <div class="levelHead">{scheduledata.levelName}</div>
+                    {/* <h3>Smart Active</h3> */}
 
                     <div class="dateBox">{scheduledata.scheduledStart}</div>
                     {/* <div class="timeBox"> 12:00 PM</div> */}

@@ -37,7 +37,8 @@ Axios.interceptors.request.use(
     if (!err.config.HideLoading) {
       HideLoading();
     }
-    return Promise.reject(err);
+    // return Promise.reject(err);
+    return err;
   }
 );
 
@@ -73,7 +74,8 @@ Axios.interceptors.response.use(
     if (!err.config.HideLoading) {
       HideLoading();
     }
-    return Promise.reject(err);
+    // return Promise.reject(err);
+    return err;
   }
 );
 
