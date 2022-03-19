@@ -56,7 +56,7 @@ const Login = () => {
               <label className="loginTxt">
                 <input
                   placeholder=" "
-                  type="Password"
+                  type={passwordtype}
                   autoComplete="Off"
                   value={logindata && logindata.Password}
                   onChange={(e) =>
