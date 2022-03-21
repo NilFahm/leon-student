@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useScheduleData } from "../data/ScheduleData";
-import { useTwilioData } from "../data/TwilioData";
+// import { useScheduleData } from "../data/ScheduleData";
 import { useLocalStorage } from "../utils/useLocalStorage";
+import { useCommon } from "../utils/useCommon";
+import { Config } from "../data/Config";
+import axios from "axios";
+
 const Schedules = () => {
   const [auth] = useLocalStorage("auth", {});
+  const { HideCircularProgress, ShowCircularProgress } = useCommon();
   const navigate = useNavigate();
-  const { StudentSchedule } = useScheduleData();
-  const { GetRoomToken } = useTwilioData();
   const [scheduledata, setScheduleData] = useState(null);
+  const [errormessage, setErrorMessage] = useState(null);
 
   useEffect(async () => {
-    const response = await StudentSchedule(auth.token);
-    if (response) {
-      setScheduleData(response[0]);
-    }
+    ShowCircularProgress();
+
+    await axios
+      .post(
+        Config.baseUrl + "/students/schedule",
+        {},
+        { headers: { Authorization: `bearer ${auth.token}` } }
+      )
+      .then((response) => {
+        setScheduleData(response.data[0]);
+        HideCircularProgress();
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data);
+        HideCircularProgress();
+      });
   }, []);
 
   async function StartSession(sessionid) {
@@ -28,6 +43,7 @@ const Schedules = () => {
           <div class="homeMainTop"></div>
           <div class="homeMainBox">
             <h1>Upcoming Classes Today</h1>
+            {errormessage && <span className="errorTxt">{errormessage}</span>}
 
             {scheduledata && (
               <div class="homeBoxLeft FL">

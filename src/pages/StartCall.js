@@ -1,19 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useTwilioData } from "../data/TwilioData";
+import { useParams, useNavigate } from "react-router-dom";
+import { useCommon } from "../utils/useCommon";
 import { useLocalStorage } from "../utils/useLocalStorage";
+import { Config } from "../data/Config";
+import axios from "axios";
 
 import VideoCall from "../components/call/VideoCall";
 
 const StartCall = () => {
-  const [auth] = useLocalStorage("auth", {});
+  const [auth, setAuth] = useLocalStorage("auth", {});
+  const navigate = useNavigate();
+  const { HideCircularProgress, ShowCircularProgress } = useCommon();
   const { sessionid } = useParams();
-  const { GetRoomToken } = useTwilioData();
   const [twiliotoken, setTwilioToken] = useState(null);
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
-      const response = await GetRoomToken(auth.token, sessionid);
-      setTwilioToken(response.authToken);
+      ShowCircularProgress();
+      await axios
+        .post(
+          Config.baseUrl + "/students/get-room-token",
+          { roomid: sessionid },
+          { headers: { Authorization: `bearer ${auth.token}` } }
+        )
+        .then((response) => {
+          setTwilioToken(response.data);
+          HideCircularProgress();
+        })
+        .catch((error) => {
+          HideCircularProgress();
+          setAuth(null);
+          navigate("/login");
+        });
     }
   }, [auth]);
 

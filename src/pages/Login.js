@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../utils/useLocalStorage";
-import { useAuthData } from "../data/AuthData";
+import { Config } from "../data/Config";
+import { useCommon } from "../utils/useCommon";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { LoginUser } = useAuthData();
+  const { ShowCircularProgress, HideCircularProgress } = useCommon();
   const [auth, setAuthData] = useLocalStorage("auth", {});
   const [passwordtype, setPasswordType] = useState("password");
   const [errormessage, setErrorMessage] = useState(null);
   const [isremember, setIsRemember] = useLocalStorage("rememberme", null);
+  const [isvalidate, setIsValidate] = useState(false);
   const [logindata, setLoginData] = useState({
-    Email: "",
-    Password: "",
+    Email: null,
+    Password: null,
   });
 
   useEffect(() => {
@@ -25,12 +28,28 @@ const Login = () => {
   }, [isremember]);
 
   async function DoLogin() {
-    const response = await LoginUser(logindata);
-    if (response) {
-      setAuthData(response);
-      navigate("/schedules");
+    // setIsValidate(true);
+    // if (ValidateData()) {
+    ShowCircularProgress();
+    await axios
+      .post(Config.baseUrl + "/students/login", logindata)
+      .then((response) => {
+        setAuthData(response.data);
+        navigate("/schedules");
+        HideCircularProgress();
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data);
+        HideCircularProgress();
+      });
+    // }
+  }
+
+  async function ValidateData() {
+    if (!logindata || !logindata.Email || !logindata.Password) {
+      return false;
     } else {
-      setErrorMessage("Invalid username or password");
+      return true;
     }
   }
 
@@ -43,6 +62,12 @@ const Login = () => {
 
         <div>
           <ul>
+            {errormessage && (
+              <li>
+                <span className="errorTxt">{errormessage}</span>
+              </li>
+            )}
+
             <li>
               <label className="loginTxt">
                 <input
@@ -52,11 +77,19 @@ const Login = () => {
                   onChange={(e) =>
                     setLoginData({ ...logindata, Email: e.target.value })
                   }
+                  readOnly={true}
+                  onFocus={(e) => (e.target.readOnly = false)}
+                  type="email"
+                  required={true}
                 />
                 <span>User Name</span>
               </label>
             </li>
-
+            {/* {isvalidate && !logindata.Email && (
+              <li>
+                <span className="errorTxt">Please Enter Email</span>
+              </li>
+            )} */}
             <li className="Input">
               <label className="loginTxt">
                 <input
@@ -67,6 +100,8 @@ const Login = () => {
                   onChange={(e) =>
                     setLoginData({ ...logindata, Password: e.target.value })
                   }
+                  readOnly={true}
+                  onFocus={(e) => (e.target.readOnly = false)}
                 />
                 <span>Password</span>
                 <Link
@@ -82,14 +117,18 @@ const Login = () => {
                 </Link>
               </label>
             </li>
+            {/* {isvalidate && !logindata.Password && (
+              <li>
+                <span className="errorTxt">Please Enter Password</span>
+              </li>
+            )} */}
             <li>
-              <span className="errorTxt">{errormessage}</span>
               <div className="rememberBox FL">
                 <label className="checkboxMain">
                   Remember me
                   <input
                     type="checkbox"
-                    checked={isremember}
+                    checked={isremember && isremember !== null}
                     onChange={(e) => {
                       e.target.checked
                         ? setIsRemember(logindata)

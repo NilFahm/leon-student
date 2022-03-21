@@ -50,32 +50,9 @@ Axios.interceptors.response.use(
     return res;
   },
   (err) => {
-    if (err.message === "Network Error") {
-      ShowLoading("Network Error");
-      setTimeout(function () {
-        HideLoading();
-      }, 6000);
-    }
-    if (err.code === "ECONNABORTED") {
-      ShowLoading("Network TimeOut");
-      setTimeout(function () {
-        HideLoading();
-      }, 6000);
-    }
-    if (err?.response?.status === 401) {
-      createBrowserHistory().replace("/Login");
-      window.location.reload();
-      ShowLoading("Authentication Error");
-      setTimeout(function () {
-        HideLoading();
-      }, 6000);
-    }
-
-    if (!err.config.HideLoading) {
-      HideLoading();
-    }
-    // return Promise.reject(err);
-    return err;
+    HideLoading();
+    // return Promise.response({error:err});
+    return err.response;
   }
 );
 

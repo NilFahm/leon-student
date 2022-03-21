@@ -10,7 +10,7 @@ import { Pages } from "./pages/Pages";
 const PrivateRoute = ({ element }) => {
   const { PrivateLayout } = Layouts();
   const [auth] = useLocalStorage("auth", null);
-  if (typeof auth.id === "undefined") {
+  if (!auth || typeof auth.id === "undefined") {
     return <Navigate to="/login" />;
   } else {
     return <PrivateLayout element={element} />;
