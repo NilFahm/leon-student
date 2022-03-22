@@ -169,7 +169,15 @@ const Classroom = () => {
                   </h2>
                 </div>
 
-                <div class="viewImg1">
+                <div
+                  class="viewImg1"
+                  style={{
+                    pointerEvents:
+                      activityname && activityname === "whiteboard"
+                        ? "none"
+                        : "auto",
+                  }}
+                >
                   <div class="whiteBoardBox position-relative">
                     {activityname && activityname === "matching" && (
                       <>
