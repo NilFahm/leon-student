@@ -13,6 +13,21 @@ const Schedules = () => {
   const [scheduledata, setScheduleData] = useState(null);
   const [errormessage, setErrorMessage] = useState(null);
 
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
   useEffect(async () => {
     ShowCircularProgress();
 
@@ -57,10 +72,28 @@ const Schedules = () => {
                     <div class="grauBox">8</div>
                     {/* <div class="levelHead"> Level 01 - Session 02</div> */}
                     <div class="levelHead">{scheduledata.levelName}</div>
-                    {/* <h3>Smart Active</h3> */}
+                    <h3>Smart Active</h3>
 
-                    <div class="dateBox">{scheduledata.scheduledStart}</div>
-                    {/* <div class="timeBox"> 12:00 PM</div> */}
+                    <div class="dateBox">
+                      {new Date(scheduledata.scheduledStart).getDate() +
+                        " " +
+                        months[
+                          new Date(scheduledata.scheduledStart).getMonth()
+                        ] +
+                        " " +
+                        new Date(scheduledata.scheduledStart).getFullYear()}
+                    </div>
+                    <div class="timeBox">
+                      {(new Date(scheduledata.scheduledStart).getHours() > 12
+                        ? 24 - new Date(scheduledata.scheduledStart).getHours()
+                        : new Date(scheduledata.scheduledStart).getHours()) +
+                        ":" +
+                        new Date(scheduledata.scheduledStart).getMinutes() +
+                        " " +
+                        (new Date(scheduledata.scheduledStart).getHours() > 12
+                          ? "PM"
+                          : "AM")}
+                    </div>
                     <a
                       href="javascript:void()"
                       class="startBtn"
