@@ -13,6 +13,42 @@ const Schedules = () => {
   const [scheduledata, setScheduleData] = useState(null);
   const [errormessage, setErrorMessage] = useState(null);
 
+  const [datestring, setDateString] = useState(null);
+  const [isclassstart, setIsClassStart] = useState(false);
+
+  useEffect(() => {
+    debugger;
+    if (scheduledata) {
+      setInterval(() => {
+        setDateString(
+          GetTimeString(scheduledata.scheduledStart, scheduledata.scheduledEnd)
+        );
+      }, 1000);
+    }
+  }, [datestring, scheduledata]);
+
+  function GetTimeString(start, end) {
+    let secs = (new Date(start) - new Date()) / 1000;
+    if (secs > 0) {
+      let hours = Math.floor(secs / (60 * 60));
+
+      let divisor_for_minutes = secs % (60 * 60);
+      let minutes = Math.floor(divisor_for_minutes / 60);
+
+      let divisor_for_seconds = divisor_for_minutes % 60;
+      let seconds = Math.ceil(divisor_for_seconds);
+
+      let obj = {
+        h: hours,
+        m: minutes,
+        s: seconds,
+      };
+      return obj.h + ":" + obj.m + ":" + obj.s;
+    } else {
+      setIsClassStart(true);
+    }
+  }
+
   const months = [
     "Jan",
     "Feb",
@@ -85,7 +121,7 @@ const Schedules = () => {
                     </div>
                     <div class="timeBox">
                       {(new Date(scheduledata.scheduledStart).getHours() > 12
-                        ? 24 - new Date(scheduledata.scheduledStart).getHours()
+                        ? new Date(scheduledata.scheduledStart).getHours() - 12
                         : new Date(scheduledata.scheduledStart).getHours()) +
                         ":" +
                         new Date(scheduledata.scheduledStart).getMinutes() +
@@ -94,10 +130,17 @@ const Schedules = () => {
                           ? "PM"
                           : "AM")}
                     </div>
+                    {!isclassstart && (
+                      <div>
+                        Start In <span>{datestring}</span>
+                      </div>
+                    )}
                     <a
                       href="javascript:void()"
-                      class="startBtn"
-                      onClick={(e) => StartSession(scheduledata.roomId)}
+                      class="btn startBtn"
+                      onClick={(e) =>
+                        isclassstart && StartSession(scheduledata.roomId)
+                      }
                     >
                       <img src="img/startBtn.svg" />
                     </a>
