@@ -1,0 +1,224 @@
+.activity {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.teapot2 {
+  z-index: 2;
+  position: absolute;
+  height: 13% !important;
+  width: auto;
+  top: 25%;
+  left: 24%;
+}
+.teapot3 {
+  z-index: 2;
+  position: absolute;
+  height: 13% !important;
+  width: auto;
+  top: 25%;
+  left: 33%;
+}
+.teapot1 {
+  z-index: 3;
+  position: absolute;
+  height: 9% !important;
+  width: auto;
+  top: 29%;
+  left: 43%;
+}
+.teapot5 {
+  z-index: 2;
+  position: absolute;
+  height: 13% !important;
+  width: auto;
+  top: 25%;
+  left: 51%;
+}
+.teapot6 {
+  z-index: 2;
+  position: absolute;
+  height: 13% !important;
+  width: auto;
+  top: 25%;
+  left: 60%;
+}
+
+.flower1 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 32%;
+  left: 20%;
+}
+.flower2 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 32%;
+  left: 30%;
+}
+.flower3 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 32%;
+  left: 40%;
+}
+.flower4 {
+  z-index: 2;
+  position: absolute;
+  height: 15% !important;
+  width: auto;
+  bottom: 32%;
+  left: 50%;
+}
+.flower5 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 32%;
+  left: 60%;
+}
+.flower6 {
+  z-index: 3;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 32%;
+  left: 70%;
+}
+.bike1 {
+  z-index: 2;
+  position: absolute;
+  height: 15% !important;
+  width: auto;
+  bottom: 8%;
+  left: 10%;
+}
+.bike2 {
+  z-index: 2;
+  position: absolute;
+  height: 15% !important;
+  width: auto;
+  bottom: 8%;
+  left: 27%;
+}
+.bike3 {
+  z-index: 2;
+  position: absolute;
+  height: 15% !important;
+  width: auto;
+  bottom: 8%;
+  left: 44%;
+}
+.bike4 {
+  z-index: 2;
+  position: absolute;
+  height: 9% !important;
+  width: auto;
+  bottom: 8%;
+  left: 60%;
+}
+.bike5 {
+  z-index: 2;
+  position: absolute;
+  height: 15% !important;
+  width: auto;
+  bottom: 8%;
+  left: 77%;
+}
+.flower {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 32%;
+  left: 50%;
+}
+.teapott {
+  z-index: 3;
+  position: absolute;
+  height: 13% !important;
+  width: auto;
+  top: 25%;
+  left: 42%;
+}
+.bike6 {
+  z-index: 2;
+  position: absolute;
+  height: 15% !important;
+  width: auto;
+  bottom: 8%;
+  left: 60%;
+}
+.hidden {
+  display: none;
+}
+.bike {
+  animation: translateY 4s alternate;
+}
+.flowert {
+  animation: translateY 3s alternate;
+}
+.tea {
+  animation: translateY 3s alternate ;
+}
+
+@keyframes translateY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  10%,
+  30% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(-3px);
+    filter: drop-shadow(0px 0px 10px lightgreen);
+  }
+  70%,
+  90% {
+    transform: translateY(-3px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateY(3px);
+  }
+}
+
+.reda13 {
+  animation: redl 1.5s alternate;
+  animation-name: activity13;
+}
+@keyframes activity13 {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(-3px);
+    filter: drop-shadow(0px 0px 10px red);
+  }
+  70%,
+  90% {
+    transform: translateX(-3px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(3px);
+  }
+}

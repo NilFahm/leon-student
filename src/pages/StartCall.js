@@ -18,12 +18,13 @@ const StartCall = () => {
       ShowCircularProgress();
       await axios
         .post(
-          Config.baseUrl + "/students/get-room-token",
+          Config.baseUrl + "/learners/get-room-token",
           { roomid: sessionid },
           { headers: { Authorization: `bearer ${auth.token}` } }
         )
         .then((response) => {
-          setTwilioToken(response.data);
+          // setTwilioToken(response.data);
+          console.log(response.data)
           HideCircularProgress();
         })
         .catch((error) => {

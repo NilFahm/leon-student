@@ -20,19 +20,36 @@ const Login = () => {
 
   useEffect(() => {
     if (isremember && isremember !== null) {
+      var jso = atob(isremember)
+      var parse = JSON.parse(jso)
       setLoginData({
-        Email: isremember.Email,
-        Password: isremember.Password,
+        Email: parse.Email,
+        Password: parse.Password,
       });
     }
   }, [isremember]);
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log(isremember)
+    }, 10000);
+  }, [])
+
+  function Remember() {
+    debugger
+    var data = JSON.stringify(logindata)
+    var bto = btoa(data.toString())
+    setIsRemember(bto)
+   
+  }
 
   async function DoLogin() {
     // setIsValidate(true);
     // if (ValidateData()) {
     ShowCircularProgress();
     await axios
-      .post(Config.baseUrl + "/students/login", logindata)
+      .post(Config.baseUrl + "/learners/login", logindata)
       .then((response) => {
         setAuthData(response.data);
         navigate("/schedules");
@@ -77,6 +94,11 @@ const Login = () => {
                   onChange={(e) =>
                     setLoginData({ ...logindata, Email: e.target.value })
                   }
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                     DoLogin()
+                    }
+                  }}
                   readOnly={true}
                   onFocus={(e) => (e.target.readOnly = false)}
                   type="email"
@@ -100,6 +122,11 @@ const Login = () => {
                   onChange={(e) =>
                     setLoginData({ ...logindata, Password: e.target.value })
                   }
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                     DoLogin()
+                    }
+                  }}
                   readOnly={true}
                   onFocus={(e) => (e.target.readOnly = false)}
                 />
@@ -131,7 +158,7 @@ const Login = () => {
                     checked={isremember && isremember !== null}
                     onChange={(e) => {
                       e.target.checked
-                        ? setIsRemember(logindata)
+                        ? Remember()
                         : setIsRemember(null);
                     }}
                   />

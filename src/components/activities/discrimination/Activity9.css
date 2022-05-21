@@ -1,0 +1,176 @@
+.activity {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.butterfy2 {
+  z-index: 2;
+  position: absolute;
+  height: 7% !important;
+  width: auto;
+  bottom: 10%;
+  left: 25%;
+}
+.butterfy3 {
+  z-index: 2;
+  position: absolute;
+  height: 7% !important;
+  width: auto;
+  top: 41%;
+  right: 33%;
+}
+.butterfy1 {
+  z-index: 3;
+  position: absolute;
+  height: 7% !important;
+  width: auto;
+  bottom: 4%;
+  right: 42%;
+}
+.butterrfytr1{
+  z-index: 2;
+  position: absolute;
+  height: 7% !important;
+  width: 7%;
+  top: 39%;
+  right: 15%;
+}
+.butterrfytr2{
+  z-index: 2;
+  position: absolute;
+  height: 7% !important;
+  width: 7%;
+  top: 40%;
+  left: 20%;
+}
+.flowerrtr1 {
+  z-index: 3;
+  position: absolute;
+  height: 10% !important; 
+  width: 7%;
+  top: 45%;
+  right: 28%;
+}
+.flowerrtr2 {
+  z-index: 3;
+  position: absolute;
+  height: 10% !important;
+  width: 7%;
+  top: 45%;
+  left: 6.5%;
+}
+.cars4 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 30%;
+  left: 49%;
+}
+.cars5 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 20%;
+  left: 18%;
+}
+.cars6 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 5%;
+  right: 10%;
+}
+.cartr2{
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: 17%;
+  bottom: 30%;
+  right: 5%;
+}
+.cartr3{
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: 17%;
+  bottom: 23%;
+  right: 18%;
+}
+.flowertr1 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 1%;
+  left: 25%;
+}
+.flowertr2 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 45%;
+  left: 28%;
+}
+.flowertr3 {
+  z-index: 2;
+  position: absolute;
+  height: 10% !important;
+  width: auto;
+  bottom: 2%;
+  right: 5%;
+}
+.biketr1 {
+  z-index: 2;
+  position: absolute;
+  height:15% !important;
+  width: auto;
+  bottom: 8%;
+  left: 5%;
+}
+.biketr2 {
+  z-index: 2;
+  position: absolute;
+  height: 14% !important;
+  width: auto;
+  bottom: 34%;
+  left: 32%;
+}
+.biketr3 {
+  z-index: 2;
+  position: absolute;
+  height:15% !important;
+  width: auto;
+  bottom: 15%;
+  left: 40%;
+}
+.bikeetr1 {
+  z-index: 2;
+  position: absolute;
+  height:15% !important;
+  width: 10%;
+  bottom: 34%;
+  left: 2%;
+}
+.bikeetr3 {
+  z-index: 2;
+  position: absolute;
+  height:15% !important;
+  width: 10%;
+  bottom: 34%;
+  left: 17%;
+}
+.hidden {
+  display: none;
+}
+.greenl {
+  animation: greenli 3s alternate;
+}
+@keyframes greenli{
+  0% {
+    filter: drop-shadow(0px 0px 15px lightgreen);
+  }
+}

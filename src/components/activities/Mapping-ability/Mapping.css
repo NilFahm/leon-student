@@ -1,0 +1,353 @@
+.hidden {
+  display: none;
+}
+.redcray {
+  z-index: 3;
+  position: absolute;
+  height: 23% !important;
+  width: 3%;
+  bottom: 1%;
+  left: 38%;
+}
+.greencray {
+  z-index: 2;
+  position: absolute;
+  height: 23% !important;
+  width: 3%;
+  bottom: 1%;
+  left: 44%;
+}
+.yellowcray {
+  z-index: 2;
+  position: absolute;
+  height: 23% !important;
+  width: 3%;
+  bottom: 1%;
+  left: 50%;
+}
+.violetcray {
+  z-index: 2;
+  position: absolute;
+  height: 23% !important;
+  width: 3%;
+  bottom: 1%;
+  left: 56%;
+}
+.curser {
+  height: 26% !important ;
+}
+
+.transcircle1 {
+  z-index: 1;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 18%;
+  left: 23.5%;
+}
+
+.transcircle2 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 21%;
+  left: 17.5%;
+}
+.transcircle3 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 27%;
+  left: 14%;
+}
+.transcircle4 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 34.5%;
+  left: 12.5%;
+}
+.transcircle5 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 42%;
+  left: 12%;
+}
+.transcircle6 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 49%;
+  left: 13.5%;
+}
+.transcircle7 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 56%;
+  left: 16%;
+}
+.transcircle8 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 62%;
+  left: 19.7%;
+}
+.transcircle9 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 65%;
+  left: 25%;
+}
+.transcircle10 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 61.5%;
+  left:30.5%;
+}
+.transcircle11 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 55%;
+  left: 34%;
+}
+.transcircle12 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 48%;
+  left: 36.5%;
+}
+.transcircle13 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 41%;
+  left: 37%;
+}
+.transcircle14 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 33.5%;
+  left: 36%;
+}
+.transcircle15 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 27%;
+  left: 33.5%;
+}
+.transcircle16 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 21%;
+  left: 29.5%;
+}
+.transcircle17 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 18%;
+  left: 45%;
+}
+.transcircle18 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 25%;
+  left: 45%;
+}
+.transcircle19 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 32%;
+  left: 45%;
+}
+.transcircle20 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 39%;
+  left: 45%;
+}
+.transcircle21 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 46%;
+  left: 45%;
+}
+.transcircle22 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 53%;
+  left: 45%;
+}
+.transcircle23 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 24%;
+  left: 55%;
+}
+.transcircle24 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 19.5%;
+  left: 60%;
+}
+.transcircle25 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 16.5%;
+  left: 65.7%;
+}
+.transcircle26 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 19%;
+  left: 71.5%;
+}
+.transcircle27 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 25%;
+  left: 74.7%;
+}
+.transcircle28 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 32%;
+  left: 73.6%;
+}
+.transcircle29 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 39%;
+  left: 71%;
+}
+.transcircle30 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 45%;
+  left: 67%;
+}
+.transcircle31 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 51%;
+  left: 63%;
+}
+.transcircle32 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 57%;
+  left: 59%;
+}
+.transcircle33 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 64%;
+  left: 56%;
+}
+.transcircle34 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 64%;
+  left: 62%;
+}
+.transcircle35 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 64%;
+  left: 68%;
+}
+.transcircle36 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 64%;
+  left: 74%;
+}
+.transcircle37 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 64%;
+  left: 80.5%;
+}
+
+.transcircle38 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 60%;
+  left: 45%;
+}
+.transcircle39 {
+  z-index: 2;
+  position: absolute;
+  height: 8% !important;
+  width: 4%;
+  top: 67%;
+  left: 45%;
+}

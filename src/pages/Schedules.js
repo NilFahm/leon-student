@@ -5,6 +5,7 @@ import { useLocalStorage } from "../utils/useLocalStorage";
 import { useCommon } from "../utils/useCommon";
 import { Config } from "../data/Config";
 import axios from "axios";
+import Homebox from "../components/schedule/Homebox";
 
 const Schedules = () => {
   const [auth] = useLocalStorage("auth", {});
@@ -17,7 +18,6 @@ const Schedules = () => {
   const [isclassstart, setIsClassStart] = useState(false);
 
   useEffect(() => {
-    debugger;
     if (scheduledata) {
       setInterval(() => {
         setDateString(
@@ -68,13 +68,13 @@ const Schedules = () => {
     ShowCircularProgress();
 
     await axios
-      .post(
-        Config.baseUrl + "/students/schedule",
-        {},
+      .get(
+        Config.baseUrl + "/learners/schedule",
         { headers: { Authorization: `bearer ${auth.token}` } }
       )
       .then((response) => {
-        setScheduleData(response.data[0]);
+        setScheduleData(response.data.schedule[0]);
+        console.log(response.data.schedule)
         HideCircularProgress();
       })
       .catch((error) => {
@@ -99,34 +99,34 @@ const Schedules = () => {
             {scheduledata && (
               <div class="homeBoxLeft FL">
                 <div class="homeBox1">
-                  <h2>{scheduledata.courseName}</h2>
+                  <h2>LEON {scheduledata.courseName}</h2>
                   <div class="homeLelvelLeft">
                     <img src="img/homeImg1.png" />
                   </div>
 
                   <div class="homeLelvel1">
-                    <div class="grauBox">8</div>
+                    <div class="grauBox">{scheduledata.loggedInStudents}</div>
                     {/* <div class="levelHead"> Level 01 - Session 02</div> */}
-                    <div class="levelHead">{scheduledata.levelName}</div>
+                    <div class="levelHead">{scheduledata.courseType}</div>
                     <h3>Smart Active</h3>
 
                     <div class="dateBox">
-                      {new Date(scheduledata.scheduledStart).getDate() +
+                      {new Date(scheduledata.startTime).getDate() +
                         " " +
                         months[
-                          new Date(scheduledata.scheduledStart).getMonth()
+                          new Date(scheduledata.startTime).getMonth()
                         ] +
                         " " +
-                        new Date(scheduledata.scheduledStart).getFullYear()}
+                        new Date(scheduledata.startTime).getFullYear()}
                     </div>
                     <div class="timeBox">
-                      {(new Date(scheduledata.scheduledStart).getHours() > 12
-                        ? new Date(scheduledata.scheduledStart).getHours() - 12
-                        : new Date(scheduledata.scheduledStart).getHours()) +
+                      {(new Date(scheduledata.startTime).getHours() > 12
+                        ? new Date(scheduledata.startTime).getHours() - 12
+                        : new Date(scheduledata.startTime).getHours()) +
                         ":" +
-                        new Date(scheduledata.scheduledStart).getMinutes() +
+                        new Date(scheduledata.startTime).getMinutes() +
                         " " +
-                        (new Date(scheduledata.scheduledStart).getHours() > 12
+                        (new Date(scheduledata.startTime).getHours() > 12
                           ? "PM"
                           : "AM")}
                     </div>
@@ -149,55 +149,7 @@ const Schedules = () => {
                 </div>
               </div>
             )}
-
-            <div class="homeBoxRight FR">
-              <div class="homeBox2">
-                <h2>LEON English</h2>
-                <div class="homeLelvelLeft">
-                  <img src="img/homeImg2.png" />
-                </div>
-
-                <div class="homeLelvel1">
-                  <div class="grauBox">6</div>
-                  <div class="levelHead"> Level 01 - Session 02</div>
-                  <h3>Smart Active</h3>
-                  <div class="FL mr10">
-                    <div class="dateBox"> 01 Oct 2021</div>
-                    <div class="timeBox"> 12:00 PM</div>
-                  </div>
-                  <a href="#" class="FL">
-                    {" "}
-                    <img src="img/startBtn2.png" />
-                  </a>
-                  <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-              </div>
-
-              <div class="homeBox2">
-                <h2>LEON Science</h2>
-                <div class="homeLelvelLeft">
-                  <img src="img/homeImg3.png" />
-                </div>
-
-                <div class="homeLelvel1">
-                  <div class="grauBox">2</div>
-                  <div class="levelHead"> Level 01 - Session 02</div>
-                  <h3>Smart Active</h3>
-                  <div class="FL mr10">
-                    <div class="dateBox"> 01 Oct 2021</div>
-                    <div class="timeBox"> 12:00 PM</div>
-                  </div>
-                  <a href="#" class="FL">
-                    {" "}
-                    <img src="img/startBtn2.png" />
-                  </a>
-                  <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-              </div>
-            </div>
-
+            <Homebox />
             <div class="clear"></div>
             <div class="box-btn text-center mt-20">
               <a href="#" class="btn btn-green">
