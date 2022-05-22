@@ -44,7 +44,6 @@ function Activity9({ sessionid, activityid }) {
   async function Apicall(obj) {
     if (auth && typeof auth.id !== "undefined") {
       ShowCircularProgress();
-      debugger
       await axios
         .post(
           Config.baseUrl + "/learners/schedule/" + sessionid + "/activities/" + activityid,
@@ -74,7 +73,6 @@ function Activity9({ sessionid, activityid }) {
 
 
   async function drop(ev, allowid) {
-    debugger
     let value = ev.target.id
     console.log(ev.target.id + "null")
     let data = ev.dataTransfer.getData("text");

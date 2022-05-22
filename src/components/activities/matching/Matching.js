@@ -49,7 +49,6 @@ const Matching = ({ sessionid, activityid }) => {
   async function Apicall(obj) {
     if (auth && typeof auth.id !== "undefined") {
       ShowCircularProgress();
-      debugger
       await axios
         .post(
           Config.baseUrl + "/learners/schedule/" + sessionid + "/activities/" + activityid,
@@ -77,7 +76,6 @@ const Matching = ({ sessionid, activityid }) => {
   }
 
   async function drop(ev, allowid) {
-    debugger
     let data = ev.dataTransfer.getData("text");
     ev.dataTransfer.allowDrop = false;
     if (data == allowid) {

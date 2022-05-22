@@ -30,7 +30,7 @@ const Classroom = () => {
   const [isaudioon, setIsAudioOn] = useState(true);
   const [isactivity, setIsActivity] = useState(false);
   const [activityname, setActivity] = useState(null);
-  const [activityid, setactivityid] = useState(null)
+  const [activityid, setactivityid] = useState(null);
   const [currenttab, setCurrentTab] = useState(1);
 
   const socket = io.connect("https://socket.fahm-technologies.com");
@@ -38,7 +38,7 @@ const Classroom = () => {
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
       const response = await GetRoomToken(auth.token, sessionid);
-      // setTwilioToken(response.authToken);
+      setTwilioToken(response.authToken);
       const joindata = { userid: auth.id, roomname: sessionid };
       socket.emit("joinroom", joindata);
       setCurrentTab(1);
@@ -106,15 +106,16 @@ const Classroom = () => {
 
   useEffect(() => {
     socket.on("activity", (data) => {
+      console.log("activity", data);
       if (
-        data.activity !== activityname &&
+        data.activity.toString() !== activityname &&
         data.activity !== "startcall" &&
         data.activity !== "endcall"
       ) {
         setActivity(data.activity);
-        setactivityid(data.activityid)
-        console.log(data.activityid)
-        console.log(data.activity)
+        setactivityid(data.activityid);
+        console.log(data.activityid);
+        console.log(data.activity);
         setIsActivity(true);
         if (currenttab === 1) {
           setCurrentTab(3);
@@ -174,12 +175,14 @@ const Classroom = () => {
                     {activityname &&
                       activityname === "whiteboard" &&
                       "White Board"}
-                    {activityname && activityname === 3 && "Matching"}
-                    {activityname && activityname === 1 && "Observing ability"}
-                    {activityname && activityname === 2 && "Colour-recognition"}
-                    {activityname && activityname === 4 && "Discrimination"}
-                    {activityname && activityname === 5 && "Quantity identification"}
-                    {activityname && activityname === 6 && "Mapping Ability"}
+                    {activityname && activityname == 3 && "Matching"}
+                    {activityname && activityname == 1 && "Observing ability"}
+                    {activityname && activityname == 2 && "Colour-recognition"}
+                    {activityname && activityname == 4 && "Discrimination"}
+                    {activityname &&
+                      activityname == 5 &&
+                      "Quantity identification"}
+                    {activityname && activityname == 6 && "Mapping Ability"}
                   </h2>
                 </div>
 
@@ -193,34 +196,52 @@ const Classroom = () => {
                   }}
                 >
                   <div class="whiteBoardBox position-relative">
-                    {activityname && activityname === 3 && (
+                    {activityname && activityname == 3 && (
                       <>
-                        <Matching sessionid={sessionid} activityid={activityname}/>
+                        <Matching
+                          sessionid={sessionid}
+                          activityid={activityname}
+                        />
                       </>
                     )}{" "}
-                    {activityname && activityname === 1 && (
+                    {activityname && activityname == 1 && (
                       <>
-                        <Activity3 sessionid={sessionid} activityid={activityname}/>
+                        <Activity3
+                          sessionid={sessionid}
+                          activityid={activityname}
+                        />
                       </>
                     )}{" "}
-                     {activityname && activityname === 2 && (
+                    {activityname && activityname == 2 && (
                       <>
-                        <Activity10 sessionid={sessionid} activityid={activityname}/>
+                        <Activity10
+                          sessionid={sessionid}
+                          activityid={activityname}
+                        />
                       </>
                     )}{" "}
-                    {activityname && activityname === 4 && (
+                    {activityname && activityname == 4 && (
                       <>
-                        <Activity9 sessionid={sessionid} activityid={activityname}/>
+                        <Activity9
+                          sessionid={sessionid}
+                          activityid={activityname}
+                        />
                       </>
                     )}{" "}
-                    {activityname && activityname === 5 && (
+                    {activityname && activityname == 5 && (
                       <>
-                      <Quantity sessionid={sessionid} activityid={activityname}/>
+                        <Quantity
+                          sessionid={sessionid}
+                          activityid={activityname}
+                        />
                       </>
                     )}{" "}
-                     {activityname && activityname === 6 && (
+                    {activityname && activityname == 6 && (
                       <>
-                      <Mapping sessionid={sessionid} activityid={activityname}/>
+                        <Mapping
+                          sessionid={sessionid}
+                          activityid={activityname}
+                        />
                       </>
                     )}{" "}
                     {activityname && activityname === "whiteboard" && (
