@@ -1,13 +1,13 @@
 // Activate smooth scroll on page load with hash links in the url
 
 $(document).ready(function () {
-  $(".activity").on("dragstart", handleDragStart, false);
-  $(".activity").on("dragmove", handleDragStart, false);
-  $(".activity").on("dragenter", handleDragEnter, false);
-  $(".activity").on("dragover", handleDragOver, false);
-  $(".activity").on("dragleave", handleDragLeave, false);
-  $(".activity").on("drop", handleDrop, false);
-  $(".activity").on("dragend", handleDragEnd, false);
+  // $(".activity").on("dragstart", handleDragStart, false);
+  // $(".activity").on("dragmove", handleDragStart, false);
+  // $(".activity").on("dragenter", handleDragEnter, false);
+  // $(".activity").on("dragover", handleDragOver, false);
+  // $(".activity").on("dragleave", handleDragLeave, false);
+  // $(".activity").on("drop", handleDrop, false);
+  // $(".activity").on("dragend", handleDragEnd, false);
 
   $(".eyeIcon").on("click", function () {
     $(this).toggleClass("active");
@@ -43,31 +43,31 @@ $(document).ready(function () {
     $(this).addClass("active");
   });
   //
-  $(".slider1 ul").slick({
-    dots: false,
-    infinite: false,
-  });
+  // $(".slider1 ul").slick({
+  //   dots: false,
+  //   infinite: false,
+  // });
 
   $("#detailsView-tab").click(function () {
     $("#summaryView").removeClass("active");
     $("#detailsView").addClass("active");
-    $(".sliderResult").slick({
-      dots: false,
-      infinite: false,
-    });
+    // $(".sliderResult").slick({
+    //   dots: false,
+    //   infinite: false,
+    // });
   });
 
   $("#summaryView-tab").click(function () {
     $("#summaryView").addClass("active");
     $("#detailsView").removeClass("active");
-    $(".sliderResult").slick({
-      dots: false,
-      infinite: false,
-    });
+    // $(".sliderResult").slick({
+    //   dots: false,
+    //   infinite: false,
+    // });
   });
 
   //
-  $(".match1 img").draggable();
+  // $(".match1 img").draggable();
   //
 
   $(".tabs a").click(function () {
@@ -79,10 +79,10 @@ $(document).ready(function () {
     $(this).addClass("current");
     $("#" + tab_id).addClass("current");
 
-    $(".sliderResult").slick({
-      dots: false,
-      infinite: false,
-    });
+    // $(".sliderResult").slick({
+    //   dots: false,
+    //   infinite: false,
+    // });
   });
 
   $("input,textarea")
@@ -168,7 +168,7 @@ $(document).ready(function () {
     $(".dashclickLayer").show();
   });
 
-  $(".scroll-pane").jScrollPane();
+  // $(".scroll-pane").jScrollPane();
 
-  $(".topClassList").jScrollPane();
+  // $(".topClassList").jScrollPane();
 });

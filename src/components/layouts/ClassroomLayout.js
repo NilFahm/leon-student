@@ -3,11 +3,11 @@ import ClassroomHeader from "../header/ClassroomHeader";
 
 const ClassroomLayout = ({ element }) => {
   return (
-    <div class="teachMainBox">
-      <div class="wapper">
+    <div className="teachMainBox">
+      <div className="wapper">
         <ClassroomHeader />
         {element}
-        <div class="bottomBox"></div>
+        <div className="bottomBox"></div>
       </div>
     </div>
   );

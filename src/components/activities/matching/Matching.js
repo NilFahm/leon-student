@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./matching.css";
 
-import axios from 'axios';
-import { useLocalStorage } from '../../../utils/useLocalStorage';
-import { useNavigate } from 'react-router';
-import { Config } from '../../../data/Config';
-import { useCommon } from '../../../utils/useCommon';
+import axios from "axios";
+import { useLocalStorage } from "../../../utils/useLocalStorage";
+import { useNavigate } from "react-router";
+import { Config } from "../../../data/Config";
+import { useCommon } from "../../../utils/useCommon";
 
 const Matching = ({ sessionid, activityid }) => {
   const [dragid, SetDragId] = useState(0);
@@ -15,24 +15,24 @@ const Matching = ({ sessionid, activityid }) => {
   const [auth] = useLocalStorage("auth", {});
   const navigate = useNavigate();
   const successsound = useRef(null);
-  const [dialogbox, setdialogbox] = useState(null)
+  const [dialogbox, setdialogbox] = useState(null);
   const falsesound = useRef(null);
-  const [apiobject, setApiObject] = useState({ ob1: 0, ob2: 0, ob3: 0 })
+  const [apiobject, setApiObject] = useState({ ob1: 0, ob2: 0, ob3: 0 });
   var ob1, ob2, ob3;
 
   useEffect(() => {
     if (apiobject.ob1 == 1 && apiobject.ob2 == 2 && apiobject.ob3 == 3) {
       setTimeout(() => {
-        setdialogbox(true)
+        setdialogbox(true);
       }, 1000);
       setTimeout(() => {
-        setdialogbox(false)
+        setdialogbox(false);
       }, 5000);
     }
-  }, [apiobject])
+  }, [apiobject]);
 
   useEffect(() => {
-    Apicall(apiobject)
+    Apicall(apiobject);
     if (trueid > 0) {
       setRingImageId(trueid);
       setTimeout(function () {
@@ -51,12 +51,16 @@ const Matching = ({ sessionid, activityid }) => {
       ShowCircularProgress();
       await axios
         .post(
-          Config.baseUrl + "/learners/schedule/" + sessionid + "/activities/" + activityid,
+          Config.baseUrl +
+            "/learners/schedule/" +
+            sessionid +
+            "/activities/" +
+            activityid,
           obj,
           { headers: { Authorization: `bearer ${auth.token}` } }
         )
         .then((response) => {
-          console.log(response.data)
+          console.log(response.data);
           HideCircularProgress();
         })
         .catch((error) => {
@@ -80,26 +84,26 @@ const Matching = ({ sessionid, activityid }) => {
     ev.dataTransfer.allowDrop = false;
     if (data == allowid) {
       ev.target.classList.add("hidden");
-      window.document.getElementById(dragid).classList.add("hidden")
+      window.document.getElementById(dragid).classList.add("hidden");
       await successsound.current.play(true);
       if (data == "1") {
         let obj = { ...apiobject };
         obj.ob1 = 1;
         setApiObject(obj);
         Apicall(obj);
-        window.document.getElementById(11).setAttribute("class", "div6")
+        window.document.getElementById(11).setAttribute("class", "div6");
       } else if (data == "2") {
         let obj = { ...apiobject };
         obj.ob2 = 2;
         setApiObject(obj);
         Apicall(obj);
-        window.document.getElementById(13).setAttribute("class", "div4")
+        window.document.getElementById(13).setAttribute("class", "div4");
       } else if (data == "3") {
         let obj = { ...apiobject };
         obj.ob3 = 3;
         setApiObject(obj);
         Apicall(obj);
-        window.document.getElementById(12).setAttribute("class", "div5")
+        window.document.getElementById(12).setAttribute("class", "div5");
       }
     } else {
       await falsesound.current.play(true);
@@ -138,7 +142,7 @@ const Matching = ({ sessionid, activityid }) => {
           id="1"
           draggable={true}
           onDragStart={(e) => drag(e)}
-          onTouchStart={(e) => drag(e)}
+          // onTouchStart={(e) => drag(e)}
         />
       </div>
       <div>
@@ -148,7 +152,7 @@ const Matching = ({ sessionid, activityid }) => {
           id="2"
           draggable={true}
           onDragStart={(e) => drag(e)}
-          onTouchStart={(e) => drag(e)}
+          // onTouchStart={(e) => drag(e)}
         />
       </div>
       <div>
@@ -158,8 +162,8 @@ const Matching = ({ sessionid, activityid }) => {
           id="3"
           draggable={true}
           onDragStart={(e) => drag(e)}
-          onTouchStart={(e) => drag(e)}
-          onTouchMove
+          // onTouchStart={(e) => drag(e)}
+          // onTouchMove
         />
       </div>
       <div onDrop={(e) => drop(e, "2")} onDragOver={(e) => allowDrop(e)}>
@@ -186,9 +190,13 @@ const Matching = ({ sessionid, activityid }) => {
         </div>
       </div>
       <div>
-        <img src={"/images/activities/1/crab.svg"} id='11' className='hidden' />
-        <img src={"/images/activities/1/lobster.svg"} id='12' className='hidden' />
-        <img src={"/images/activities/1/Fish.svg"} id='13' className='hidden' />
+        <img src={"/images/activities/1/crab.svg"} id="11" className="hidden" />
+        <img
+          src={"/images/activities/1/lobster.svg"}
+          id="12"
+          className="hidden"
+        />
+        <img src={"/images/activities/1/Fish.svg"} id="13" className="hidden" />
       </div>
       {trueid && (
         <div>
@@ -207,17 +215,26 @@ const Matching = ({ sessionid, activityid }) => {
           )}
         </div>
       )}
-      <div class="ocean">
-        <div class="wave"></div>
-        <div class="wave"></div>
+      <div className="ocean">
+        <div className="wave"></div>
+        <div className="wave"></div>
       </div>
-      {dialogbox && dialogbox == true &&<div className="ringimage" style={{
-          left: "20%", textAlign: "center",backgroundColor:"black",borderRadius:"20px"
-        }}>
-          <h1 style={{ color: "lightgreen" ,padding:"10px" }}>Congratulations! <br />
-            Activity completed successfully</h1>
-        </div> }
-
+      {dialogbox && dialogbox == true && (
+        <div
+          className="ringimage"
+          style={{
+            left: "20%",
+            textAlign: "center",
+            backgroundColor: "black",
+            borderRadius: "20px",
+          }}
+        >
+          <h1 style={{ color: "lightgreen", padding: "10px" }}>
+            Congratulations! <br />
+            Activity completed successfully
+          </h1>
+        </div>
+      )}
     </div>
   );
 };

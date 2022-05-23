@@ -38,7 +38,7 @@ const Classroom = () => {
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
       const response = await GetRoomToken(auth.token, sessionid);
-      setTwilioToken(response.authToken);
+      //setTwilioToken(response.authToken);
       const joindata = { userid: auth.id, roomname: sessionid };
       socket.emit("joinroom", joindata);
       setCurrentTab(1);
@@ -47,8 +47,8 @@ const Classroom = () => {
 
   const remoteParticipants = participants
     .filter((x) => x.identity !== "azizi@leonclassroom.com")
-    .map((participant) => (
-      <li>
+    .map((participant, index) => (
+      <li key={index}>
         <Participant key={participant.sid} participant={participant} />
       </li>
     ));
@@ -187,7 +187,7 @@ const Classroom = () => {
                 </div>
 
                 <div
-                  class="viewImg1"
+                  className="viewImg1"
                   style={{
                     pointerEvents:
                       activityname && activityname === "whiteboard"
@@ -195,7 +195,7 @@ const Classroom = () => {
                         : "auto",
                   }}
                 >
-                  <div class="whiteBoardBox position-relative">
+                  <div className="whiteBoardBox position-relative">
                     {activityname && activityname == 3 && (
                       <>
                         <Matching
@@ -272,7 +272,7 @@ const Classroom = () => {
                     <div className="viewImg1">
                       <div className="whiteBoardBox position-relative">
                         <img src="/img/novideoImg1.png" />
-                        <div class="novidShow d-flex align-items-center justify-content-center">
+                        <div className="novidShow d-flex align-items-center justify-content-center">
                           <img src="/img/novideoImg1Inner.svg" />
                         </div>
                       </div>
@@ -297,7 +297,7 @@ const Classroom = () => {
                     role="tabpanel"
                     aria-labelledby="teamList-tab"
                   >
-                    <ul class="whiteListMain">
+                    <ul className="whiteListMain">
                       <li>
                         {teacherParticipant && teacherParticipant.length > 0 ? (
                           teacherParticipant.map((participant) => (
@@ -310,7 +310,7 @@ const Classroom = () => {
                           <>
                             <div className="whiteBoardBox position-relative">
                               <img src="/img/novideoImg1.png" />
-                              <div class="novidShow d-flex align-items-center justify-content-center">
+                              <div className="novidShow d-flex align-items-center justify-content-center">
                                 <img src="/img/novideoImg1Inner.svg" />
                               </div>
                             </div>
@@ -319,7 +319,7 @@ const Classroom = () => {
                       </li>
 
                       {room ? (
-                        <li>
+                        <li key={"lifrom"}>
                           <LocalParticipant
                             key={room.localParticipant.sid}
                             participant={room.localParticipant}
@@ -328,12 +328,12 @@ const Classroom = () => {
                           />
                         </li>
                       ) : (
-                        <li>
+                        <li key={"lipnotcon"}>
                           <ParticipantNotConnected />
                         </li>
                       )}
 
-                      <div class="clear"></div>
+                      <div className="clear"></div>
                     </ul>
                   </div>
                 )}
@@ -349,7 +349,7 @@ const Classroom = () => {
                   aria-labelledby="studList-tab"
                 >
                   <ul className="studList studList2 studList3">
-                    <li>
+                    <li key={"listulist"}>
                       {room ? (
                         <LocalParticipant
                           key={room.localParticipant.sid}
@@ -366,7 +366,7 @@ const Classroom = () => {
                       Array(7 - remoteParticipants.length),
                       (e, i) => {
                         return (
-                          <li>
+                          <li key={"lip" + i}>
                             <ParticipantNotConnected />
                           </li>
                         );
@@ -399,7 +399,7 @@ const Classroom = () => {
                 role="tablist"
               >
                 {isactivity && (
-                  <li class="nav-item" role="presentation">
+                  <li className="nav-item" role="presentation">
                     <a
                       className={
                         currenttab === 3 ? "nav-link active" : "nav-link"
@@ -454,12 +454,12 @@ const Classroom = () => {
         </div>
       </div>
 
-      <div class="subNameBox">
-        <div class="homeLion2">
+      <div className="subNameBox">
+        <div className="homeLion2">
           <img src="/img/homeLion2.svg" />
         </div>
         <span>Smart Active</span>
-        <div class="SubName">
+        <div className="SubName">
           <strong>
             LEON English &gt; <br />
             L1 &gt; Session 02
@@ -468,7 +468,7 @@ const Classroom = () => {
         </div>
       </div>
 
-      <div class="handLinks">
+      <div className="handLinks">
         {room && (
           <Link
             to=""
@@ -489,7 +489,7 @@ const Classroom = () => {
               className={isvideoon ? "linkVid" : "linkVid active"}
               onClick={(e) => VideoOnOff(isvideoon)}
             ></Link>
-            <a href="#" class="linkHand"></a>
+            <a href="#" className="linkHand"></a>
           </>
         )}
       </div>

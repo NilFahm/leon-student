@@ -4,25 +4,25 @@ const ClassroomHeader = () => {
   return (
     <>
       <header>
-        <a href="#" class="logoBox">
+        <a href="#" className="logoBox">
           <img src="/img/logo.svg" />
         </a>
-        <div class="topRight">
-          <div class="recoTop">
-            <a href="#" class="recBtn">
+        <div className="topRight">
+          <div className="recoTop">
+            <a href="#" className="recBtn">
               <img src="/img/recIcon.svg" />
             </a>
-            <div class="recTiming"> 00:17:46 </div>
-            <a href="#" class="wifiBtn">
+            <div className="recTiming"> 00:17:46 </div>
+            <a href="#" className="wifiBtn">
               <img src="/img/wifIcon.svg" />
             </a>
-            <div class="clear"></div>
+            <div className="clear"></div>
           </div>
-          <div class="profil">
-            <div class="dropdown">
+          <div className="profil">
+            <div className="dropdown">
               <a
                 href="#"
-                class="dropdown-toggle"
+                className="dropdown-toggle"
                 type="button"
                 id="dropdownMenuButton"
                 data-toggle="dropdown"
@@ -32,13 +32,13 @@ const ClassroomHeader = () => {
                 <img src="/img/proImg.png" />
               </a>
               <div
-                class="dropdown-menu  dropdown-menu-right"
+                className="dropdown-menu  dropdown-menu-right"
                 aria-labelledby="dropdownMenuButton"
               >
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   My Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Settings
                 </a>
               </div>
