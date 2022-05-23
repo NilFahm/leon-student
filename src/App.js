@@ -6,6 +6,7 @@ import { Layouts } from "./components/layouts/Layouts";
 
 //Pages
 import { Pages } from "./pages/Pages";
+import Matching from "./components/activities/matching/Matching";
 
 const PrivateRoute = ({ element }) => {
   const { PrivateLayout } = Layouts();

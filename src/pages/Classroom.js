@@ -38,7 +38,7 @@ const Classroom = () => {
   useEffect(async () => {
     if (auth && typeof auth.id !== "undefined") {
       const response = await GetRoomToken(auth.token, sessionid);
-      //setTwilioToken(response.authToken);
+      setTwilioToken(response.authToken);
       const joindata = { userid: auth.id, roomname: sessionid };
       socket.emit("joinroom", joindata);
       setCurrentTab(1);
