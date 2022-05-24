@@ -196,7 +196,7 @@ const Classroom = () => {
                   }}
                 >
                   <div className="whiteBoardBox position-relative">
-                    {activityname && activityname == 3 && (
+                    {/* {activityname && activityname == 3 && (
                       <>
                         <Matching
                           sessionid={sessionid}
@@ -243,11 +243,26 @@ const Classroom = () => {
                           activityid={activityname}
                         />
                       </>
-                    )}{" "}
-                    {activityname && activityname === "whiteboard" && (
+                    )}{" "} */}
+                    {activityname && activityname === "whiteboard" ? (
                       <iframe
                         src={
                           "https://whiteboard.fahm-technologies.com/?whiteboardid=67c215e2-f2f4-49da-9c18-2f0df7c6fe81"
+                        }
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    ) : (
+                      <iframe
+                        src={
+                          "https://leonactivity.fahm-technologies.com/startactivity/" +
+                          activityname +
+                          "?sessionid=" +
+                          sessionid +
+                          "&authtoken=" +
+                          auth.token
                         }
                         style={{
                           width: "100%",
